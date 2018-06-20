@@ -1,0 +1,27 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.calc-box {
+  border: 1px solid black;
+  width: 1000px;
+  height: 500px;
+}
+.button1 {
+  width: 100px;
+  height: 50px;
+  border: 1px solid black;
+  border-bottom: none;
+  background: white;
+  flex-direction: row;
+}
+.button2 {
+  width: 100px;
+  height: 50px;
+  border: 1px solid black;
+  border-bottom: none;
+  background: green;
+  flex-direction: row;
+}
