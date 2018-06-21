@@ -12,10 +12,11 @@ class Tab extends React.Component {
 
     changeColor(){
         this.setState({black: !this.state.black})
+        console.log()
     }
 
     render() {
-        let btn_class = this.state.black ? "button1" : "button2";
+        let btn_class = this.state.black ? "inactive" : "active";
 
         return <button className={btn_class} onClick={this.changeColor} id={this.props.id}>{this.props.text}</button>
                 

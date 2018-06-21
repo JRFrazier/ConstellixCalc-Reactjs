@@ -9,7 +9,7 @@
   width: 1000px;
   height: 500px;
 }
-.button1 {
+.inactive {
   width: 100px;
   height: 50px;
   border: 1px solid black;
@@ -17,7 +17,7 @@
   background: white;
   flex-direction: row;
 }
-.button2 {
+.active {
   width: 100px;
   height: 50px;
   border: 1px solid black;

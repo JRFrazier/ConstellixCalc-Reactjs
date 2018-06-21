@@ -12,7 +12,7 @@ class App extends Component {
         </header>
         <div id="calc-main">
           <Tab text="DNS" id="dns-button"/>
-          <Tab text="Sonar"/>
+          <Tab text="Sonar" id="sonar-button"/>
           <div id="info-bar"><p>Place Holder</p></div>
           <div className="calc-box">
             <DnsCalc />
