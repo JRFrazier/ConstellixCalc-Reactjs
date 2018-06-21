@@ -25,3 +25,8 @@
   background: green;
   flex-direction: row;
 }
+#info-bar {
+  border: 1px solid green;
+  background: green;
+  height: 40px;
+}

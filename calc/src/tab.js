@@ -18,6 +18,8 @@ class Tab extends React.Component {
         let btn_class = this.state.black ? "button1" : "button2";
 
         return <button className={btn_class} onClick={this.changeColor} id={this.props.id}>{this.props.text}</button>
+                
+        
     }
 }
 

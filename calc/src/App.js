@@ -13,6 +13,7 @@ class App extends Component {
         <div id="calc-main">
           <Tab text="DNS" id="dns-button"/>
           <Tab text="Sonar"/>
+          <div id="info-bar"><p>Place Holder</p></div>
           <div className="calc-box">
             <DnsCalc />
             <p className="App-intro">
