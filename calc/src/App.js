@@ -3,7 +3,29 @@ import './App.css';
 import DnsCalc from './dns-calc'
 import Tab from './tab.js'
 
-class App extends Component {
+class App extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      className: "inactive",
+      value: [1,2],
+    }
+  }
+  logThis(i) {
+    const x = document.getElementById(i);
+    console.log(x);
+  }
+
+  renderTab(i) {
+    const num = i + 1
+    return (
+      <Tab 
+        id={this.state.value[i]} 
+        onClick={() => this.logThis(num)}
+        className={this.state.className}
+      />)
+  } 
+
   render() {
     return (
       <div className="App">
@@ -11,8 +33,8 @@ class App extends Component {
           <h1 className="App-title">Welcome to Constellix</h1>
         </header>
         <div id="calc-main">
-          <Tab text="DNS" id="dns-button"/>
-          <Tab text="Sonar" id="sonar-button"/>
+          {this.renderTab(0)}
+          {this.renderTab(1)}
           <div id="info-bar"><p>Place Holder</p></div>
           <div className="calc-box">
             <DnsCalc />
