@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import DnsCalc from './dns-calc'
+import SonarCalc from './sonar-calc'
 import Tab from './tab.js'
 
 class App extends Component{
@@ -11,9 +12,21 @@ class App extends Component{
       value: [1,2],
     }
   }
-  logThis(i) {
+
+  handleClick(i) {
     const x = document.getElementById(i);
-    console.log(x);
+    if (parseInt(x.id, 10) === 1 && x.className === 'inactive') {
+      return (
+        x.className = 'active',
+        document.getElementById(2).className = 'inactive',
+        console.log(document.getElementById('calcType'))
+      )
+    } else if(parseInt(x.id, 10) === 2 && x.className === 'inactive') {
+      return (
+        x.className = 'active',
+        document.getElementById(1).className = 'inactive'
+      )
+    }
   }
 
   renderTab(i) {
@@ -21,7 +34,7 @@ class App extends Component{
     return (
       <Tab 
         id={this.state.value[i]} 
-        onClick={() => this.logThis(num)}
+        onClick={() => this.handleClick(num)}
         className={this.state.className}
       />)
   } 
@@ -37,7 +50,7 @@ class App extends Component{
           {this.renderTab(1)}
           <div id="info-bar"><p>Place Holder</p></div>
           <div className="calc-box">
-            <DnsCalc />
+            <div id="calcType">Place Holder</div>
             <p className="App-intro">
             To get started, edit <code>src/App.js</code> and save to reload.
             </p>
