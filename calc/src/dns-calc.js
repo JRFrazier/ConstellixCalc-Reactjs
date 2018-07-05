@@ -1,10 +1,10 @@
 import React from 'react';
 
 class DnsCalc extends React.Component {
-    render(){
-    return  (
-        
-    ) 
+    render() {
+        return  (
+            <h2> DNS </h2>
+        ) 
     }
 };
 
