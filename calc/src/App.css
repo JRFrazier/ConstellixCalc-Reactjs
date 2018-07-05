@@ -30,3 +30,10 @@
   background: green;
   height: 40px;
 }
+.dns-form {
+}
+.dns-form input {
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 50px;
+}

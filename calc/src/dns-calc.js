@@ -1,11 +1,15 @@
-import React from 'react';
+import React from "react";
 
 class DnsCalc extends React.Component {
-    render() {
-        return  (
-            <h2> DNS </h2>
-        ) 
-    }
-};
+  render() {
+    return (
+      <form className="dns-form">
+        Number of Domains: <input type="text" />
+        <br />
+        Number of Records: <input type="text" />
+      </form>
+    );
+  }
+}
 
 export default DnsCalc;
