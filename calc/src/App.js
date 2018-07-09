@@ -76,9 +76,7 @@ class App extends Component{
           <div id="info-bar"><p>Place Holder</p></div>
           <div className="calc-box">
             <div id="calcType">{page}</div>
-            <div id="calcType">Place Holder</div>
             <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
             </p>
           </div>
         </div> 
