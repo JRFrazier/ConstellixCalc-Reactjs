@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       value: [1, 2, 3],
       calcPage: 1,
-      dns: { domains: 0, records: 0, gtd: 0 }
+      dns: { domains: 0, records: 0, gtd: 0, geoprox: 0, ipfilter: 0, aname:0, addusers: 0}
     };
   }
 
