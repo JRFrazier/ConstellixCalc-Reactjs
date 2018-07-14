@@ -1,8 +1,9 @@
 import React from 'react';
+import DnsCalc from './dns-calc.js'
 
 class Monthly extends React.Component {
     render(){
-    return <h2> Chose a Service </h2>
+    return <h2>{this.props.obj.records}  </h2>
     }
 };
 

@@ -10,9 +10,9 @@ class App extends Component{
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
-      className: "inactive",
       value: [1,2,3],
-      calcPage: 1 
+      calcPage: 1, 
+      dns: {domains: 0, records: 0, gtd: 0}
     }
   }
 
@@ -41,7 +41,6 @@ class App extends Component{
       )
     }
   }
-
   
   renderTab(i) {
     const num = i + 1
@@ -53,14 +52,21 @@ class App extends Component{
       />)
   } 
 
+  renderTotal(i) {
+    if (i[0] === 'records'){
+      this.state.dns.records = i[1]
+    }
+  }
+
   render() {
     let page;
     const calcPage = this.state.calcPage;
+    const obj = {records: 1}
 
     if (calcPage === 1) {
-      page = <Monthly />
+      page = <Monthly obj={this.state.dns} />
     } else if (calcPage === 2) {
-      page = <DnsCalc />
+      page = <DnsCalc getTotal={(total) => this.renderTotal(total) }/>
     } else if (calcPage ===3) {
       page = <SonarCalc />
     }
