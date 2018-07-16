@@ -4,17 +4,26 @@ import DnsCalc from "./dns-calc.js";
 import SonarCalc from "./sonar-calc.js";
 import Monthly from "./monthly";
 import Tab from "./tab.js";
+import InfoBar from "./infobar.js";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.renderTotal = this.renderTotal.bind(this);
-    this.renderGrandTotal = this.renderGrandTotal.bind(this);
     this.state = {
       value: [1, 2, 3],
       calcPage: 1,
-      dns: { domains: 0, records: 0, gtd: 0, geoprox: 0, ipfilter: 0, aname: 0, addusers: 0},
+      dns: {
+        domains: 0,
+        records: 0,
+        queries: 0,
+        gtd: 0,
+        geoprox: 0,
+        ipfilter: 0,
+        aname: 0,
+        addusers: 0
+      },
       total: 0
     };
   }
@@ -58,42 +67,32 @@ class App extends Component {
 
   renderTotal(i) {
     if (i[0] === "domains") {
-      this.setState({ ...this.state, dns: { ...this.state.dns, domains: i[1]}});
+      this.setState({
+        ...this.state,
+        dns: { ...this.state.dns, domains: i[1] }
+      });
     } else if (i[0] === "records") {
-      this.setState({ ...this.state, dns: { ...this.state.dns, records: i[1]}});
+      this.setState({
+        ...this.state,
+        dns: { ...this.state.dns, records: i[1] }
+      });
     } else if (i[0] === "queries") {
-      this.setState({ ...this.state, dns: { ...this.state.dns, queries: i[1]}});
+      this.setState({
+        ...this.state,
+        dns: { ...this.state.dns, queries: i[1] }
+      });
     } else if (i[0] === "gtd") {
     } else if (i[0] === "ipfilter") {
     } else if (i[0] === "aname") {
     } else {
     }
-    let total = 1
-    const totalValues = Object.values(this.state.dns);
-    const calcTotal = totalValues.forEach(x => {
-      if (isNaN(x)) {
-        total += 0;
-      } else {
-        total += x;
-      }
-    })
-    console.log(this.state.dns);
-    this.renderGrandTotal(total);
   }
-
-  renderGrandTotal(i) {
-    this.setState({total: i})
-  }
-
-
 
   render() {
     let dnsPage = "invisible";
     let sonarPage = "invisible";
     let monthlyPage = "monthly";
     const calcPage = this.state.calcPage;
-    const obj1 = this.state.dns;
-    const total = this.state.total;
 
     if (calcPage === 1) {
       monthlyPage = "monthly"; //<Monthly obj={this.state.dns} />;
@@ -138,9 +137,7 @@ class App extends Component {
             onClick={() => this.handleClick(3)}
             className="inactive"
           />
-          <div id="info-bar">
-            <h3>{this.state.total ? this.state.total : 0}</h3>
-          </div>
+          <InfoBar obj={this.state.dns} />
           <div className="calc-box">
             <div id="calcType">
               <DnsCalc
