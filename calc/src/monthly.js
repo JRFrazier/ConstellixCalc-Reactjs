@@ -2,13 +2,17 @@ import React from "react";
 import DnsCalc from "./dns-calc.js";
 
 class Monthly extends React.Component {
-  render() {
+
+    render() {
+        const domains = this.props.obj.domains ? this.props.obj.domains : 0;
+        const records = this.props.obj.records ? this.props.obj.records : 0;
+        const total = domains + records;
     return (
         <div className={this.props.className}>
             <div className="monthly-breakdown">
                 <h3> 
-                    Domains: {' '}
-                    {this.props.obj.domains ? this.props.obj.records : 0}
+                    Domains:{' '}
+                    {this.props.obj.domains ? this.props.obj.domains : 0}
                 </h3>
                 <h3> 
                     Records:{' '} 
@@ -16,7 +20,7 @@ class Monthly extends React.Component {
                 </h3>
                 <h3>
                     Queries:{' '}
-                    {this.props.obj.queries ? this.props.obj.records : 0}
+                    {this.props.obj.queries ? this.props.obj.queries: 0}
                 </h3>
                 <h3>
                     GTD:{' '}
