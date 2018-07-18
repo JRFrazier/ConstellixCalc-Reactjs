@@ -2,15 +2,41 @@ import React from "react";
 
 class SonarElement extends React.Component {
   render() {
-    const listFields = this.props.sonarFields[0]
+    console.log(this.props.value)
     return (
-      <div>{this.props.sonarFields.sonarArr[0]} </div>
+      <div>{this.props.value.map((x) => {return (
+        <form key={x} className={this.props.className}> 
+        <button id="sonar-delete">delete</button>
+        <label>Number Of Checks: </label>
+        <input type="text"/> 
+        <br />
+        <select>
+          <option value="HTTP">HTTP</option> 
+          <option value="HTTPS">DNS</option>
+          <option value="TCP">TCP</option>
+          <option value="DNS">DNS</option>
+          <option value="Watterfall">Watterfall</option>
+        </select>
+      </form>
+      )})}</div>
     )
   }
 }
 
 class SonarCalc extends React.Component {
-  RenderNew() {
+  constructor(props) {
+    super(props);
+    this.addFoo = this.addFoo.bind(this);
+    this.state = {
+      foo: []
+    }
+  }
+  addFoo() {
+    const foo = this.state.foo.concat(this.state.foo.length + 1);
+    this.setState({foo: foo});
+    console.log(this.state.foo);
+  }
+  /*RenderNew() {
     const newEl = (
       <form className={this.props.className}> 
         <label>Number Of Checks: </label>
@@ -26,29 +52,14 @@ class SonarCalc extends React.Component {
       </form>
     )
     return newEl
-  }
+  }*/
   render() {
-    let sonarArr = [newEl];
-    const newEl = (
-      <form  className={this.props.className}> 
-        <label>Number Of Checks: </label>
-        <input type="text"/> 
-        <br />
-        <select>
-          <option value="HTTP">HTTP</option> 
-          <option value="HTTPS">DNS</option>
-          <option value="TCP">TCP</option>
-          <option value="DNS">DNS</option>
-          <option value="Watterfall">Watterfall</option>
-        </select>
-      </form>
-    )
-
     return (
       <div className={this.props.className}>
-        <button onClick={sonarArr.push(newEl)} type="button">Click Me</button>
+        <button onClick={() => {this.addFoo()}
+        } type="button">Click Me</button>
         <div id="sonar-fields">
-        <SonarElement sonarFields={sonarArr} />
+        <SonarElement className={"sonar-calc"} value={this.state.foo} />
         </div>
       </div>
     ) 

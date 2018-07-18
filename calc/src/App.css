@@ -37,7 +37,13 @@
   margin-top: 10px;
   width: 50px;
 }
-
+.sonar-calc {
+  border: 0.5px solid lightgray;
+  background: lightgray;
+  margin: 10px 5px 10px 5px;
+  padding: 10px;
+  display: flex;
+}
 .invisible {
   visibility: hidden;
   margin: 0px;
