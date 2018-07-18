@@ -27,7 +27,8 @@ class App extends Component {
       total: 0
     };
   }
-
+  
+  // Tab Selection 
   handleClick(i) {
     const x = document.getElementById(i);
     if (parseInt(x.id, 10) === 1 && x.className === "inactive") {
