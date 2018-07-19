@@ -27,8 +27,8 @@ class App extends Component {
       total: 0
     };
   }
-  
-  // Tab Selection 
+
+  // Tab Selection
   handleClick(i) {
     const x = document.getElementById(i);
     if (parseInt(x.id, 10) === 1 && x.className === "inactive") {
@@ -83,9 +83,31 @@ class App extends Component {
         dns: { ...this.state.dns, queries: i[1] }
       });
     } else if (i[0] === "gtd") {
+      this.setState({
+        ...this.state,
+        dns: { ...this.state.dns, gtd: i[1] }
+      });
+    } else if (i[0] === "geoprox") {
+      this.setState({
+        ...this.state,
+        dns: { ...this.state.dns, geoprox: i[1] }
+      });
     } else if (i[0] === "ipfilter") {
+      this.setState({
+        ...this.state,
+        dns: { ...this.state.dns, ipfilter: i[1] }
+      });
     } else if (i[0] === "aname") {
-    } else {
+      this.setState({
+        ...this.state,
+        dns: { ...this.state.dns, aname: i[1] }
+      });
+      console.log(i);
+    } else if (i[0] === "addusers") {
+      this.setState({
+        ...this.state,
+        dns: { ...this.state.dns, addusers: i[1] }
+      });
     }
   }
 

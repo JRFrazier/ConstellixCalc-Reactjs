@@ -22,13 +22,11 @@ class Monthly extends React.Component {
             Geo Proximity: {this.props.obj.geoprox ? this.props.obj.geoprox : 0}
           </h3>
           <h3>
-            IP Filters:{" "}
-            {this.props.obj.ipfilters ? this.props.obj.ipfilters : 0}
+            IP Filters: {this.props.obj.ipfilter ? this.props.obj.ipfilter : 0}
           </h3>
           <h3>ANAME: {this.props.obj.aname ? this.props.obj.aname : 0}</h3>
           <h3>
-            Additional Users:{" "}
-            {this.props.obj.adduser ? this.props.obj.adduser : 0}
+            Add Users: {this.props.obj.addusers ? this.props.obj.addusers : 0}
           </h3>
         </div>
       </div>

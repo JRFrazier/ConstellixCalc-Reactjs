@@ -66,14 +66,20 @@ class DnsCalc extends React.Component {
         <input
           type="text"
           id="aname"
-          onChange={event => this.someFunk(event)}
+          onChange={event => {
+            this.someFunk(event);
+            console.log(event.target.value);
+          }}
         />
         <br />
         <label> Additional User Accounts: </label>
         <input
           type="text"
-          id="adduser"
-          onChange={event => this.someFunk(event)}
+          id="addusers"
+          onChange={event => {
+            this.someFunk(event);
+            console.log(event.target.value);
+          }}
         />
       </form>
     );

@@ -6,10 +6,8 @@ class InfoBar extends React.Component {
     const total = values.reduce((a, b) => {
       if (isNaN(a)) {
         a = 0;
-        console.log("a");
       } else if (isNaN(b)) {
         b = 0;
-        console.log("b");
       }
       return a + b;
     });
