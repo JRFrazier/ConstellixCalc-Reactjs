@@ -1,40 +1,24 @@
 import React from "react";
+import SonarCheck from "./sonar-check.js";
 
-class SonarElement extends React.Component {
-  render() {
-    console.log(this.props.value)
-    return (
-      <div>{this.props.value.map((x) => {return (
-        <form key={x} className={this.props.className}> 
-        <button id="sonar-delete">delete</button>
-        <label>Number Of Checks: </label>
-        <input type="text"/> 
-        <br />
-        <select>
-          <option value="HTTP">HTTP</option> 
-          <option value="HTTPS">DNS</option>
-          <option value="TCP">TCP</option>
-          <option value="DNS">DNS</option>
-          <option value="Watterfall">Watterfall</option>
-        </select>
-      </form>
-      )})}</div>
-    )
-  }
-}
 
 class SonarCalc extends React.Component {
   constructor(props) {
     super(props);
-    this.addFoo = this.addFoo.bind(this);
+    this.addCheck = this.addCheck.bind(this);
+    this.deleteCheck = this.deleteCheck.bind(this);
     this.state = {
-      foo: []
+      checks: []
     }
   }
-  addFoo() {
-    const foo = this.state.foo.concat(this.state.foo.length + 1);
-    this.setState({foo: foo});
-    console.log(this.state.foo);
+  addCheck() {
+    const num = this.state.checks.concat(this.state.checks.length + 1);
+    this.setState({checks: num});
+    console.log(this.state.num);
+  }
+
+  deleteCheck() {
+    console.log("Deleted");
   }
   /*RenderNew() {
     const newEl = (
@@ -56,10 +40,10 @@ class SonarCalc extends React.Component {
   render() {
     return (
       <div className={this.props.className}>
-        <button onClick={() => {this.addFoo()}
+        <button onClick={() => {this.addCheck()}
         } type="button">Click Me</button>
         <div id="sonar-fields">
-        <SonarElement className={"sonar-calc"} value={this.state.foo} />
+        <SonarCheck className={"sonar-calc"} value={this.state.checks} />
         </div>
       </div>
     ) 
