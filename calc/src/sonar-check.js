@@ -1,12 +1,12 @@
 import React from "react";
-import DeleteButton from "./delete-button";
 class SonarCheck extends React.Component {
   render() {
     return (
       <div>
         {this.props.value.map(x => {
           return (
-            <form key={x} className={this.props.className}>
+            <form key={x} onSubmit={event => event.preventDefault()} className={this.props.className}>
+            <button onClick={() => this.props.delete(x)}>What the fuck</button>
               <label>Number Of Checks: </label>
               <input type="text" />
               <br />
@@ -17,6 +17,7 @@ class SonarCheck extends React.Component {
                 <option value="DNS">DNS</option>
                 <option value="Watterfall">Watterfall</option>
               </select>
+              <p>Check Number:{x}</p>
             </form>
           );
         })}
