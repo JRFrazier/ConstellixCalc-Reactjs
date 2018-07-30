@@ -2,10 +2,10 @@ import React from "react";
 import ReactModal from "react-modal";
 
 //Model Element
-ReactModal.setAppElement('#root');
+ReactModal.setAppElement("#root");
 
 class SonarCheck extends React.Component {
-  constructor () {
+  constructor() {
     super();
     this.state = {
       showModal: false,
@@ -18,7 +18,6 @@ class SonarCheck extends React.Component {
         na_eu: 0,
         ap: 0,
         oc: 0
-
       },
       ftp_locations: {
         na_eu: 0,
@@ -33,9 +32,9 @@ class SonarCheck extends React.Component {
       dns_locations: {
         na_eu: 0,
         ap: 0,
-        oc: 0  
-      }
-    
+        oc: 0
+      },
+      defaultChecked_US: false
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -44,53 +43,79 @@ class SonarCheck extends React.Component {
   }
 
   handleTotal() {
-    console.log(this.state.http_locations)
+    console.log(this.state.http_locations);
   }
 
-
-  handleOpenModal () {
+  handleOpenModal() {
     this.setState({ showModal: true });
   }
-  
-  handleCloseModal () {
-    const element = document.getElementById('us-check');
-    element.defaultChecked = element.checked
+
+  handleCloseModal() {
+    const element = document.getElementsByClassName("us-check");
+    element.defaultChecked = element.checked;
     this.handleTotal();
     this.setState({ showModal: false });
-    console.log(element.checked)
+    console.log(element.checked);
   }
 
   handleChange(event) {
-    if (event.target.id === "us-check") {
-      this.setState({...this.state, http_locations: {...this.state.http_locations, na_eu: 1}})
-    };
+    const checkId = `defaultChecked_${event.target.id}`;
+    const newState = {};
+    if (
+      event.target.className === "useu-check" &&
+      event.target.checked === true
+    ) {
+      const num = this.state.http_locations.na_eu + 1;
+      this.setState({
+        ...this.state,
+        http_locations: { ...this.state.http_locations, na_eu: num }
+      });
+      newState[checkId] = true;
+      this.setState(newState);
+      console.log(newState);
+    } else {
+      const num = this.state.http_locations.na_eu - 1;
+      this.setState({
+        ...this.state,
+        http_locations: { ...this.state.http_locations, na_eu: num }
+      });
+      newState[checkId] = false;
+      this.setState(newState);
+    }
     console.log(event.target.checked);
   }
 
   modalExit(event) {
-    const modal = document.getElementById('myModal');
+    const modal = document.getElementById("myModal");
     if (event === "Modal") {
       modal.style.display = "none";
     }
-      console.log(event)
+    console.log(event);
   }
-  
+
   modalButton() {
-    const modal = document.getElementById('myModal');
+    const modal = document.getElementById("myModal");
 
     modal.style.display = "block";
   }
-  
+
   render() {
     return (
       <div>
         {this.props.value.map(x => {
           return (
-            <form key={x} onSubmit={event => event.preventDefault()} className={this.props.className}>
-            <button onClick={() => this.props.delete(x)}>Delete</button>
-            <span className="flag-icon flag-icon-gr">Flag</span>
+            <form
+              key={x}
+              onSubmit={event => event.preventDefault()}
+              className={this.props.className}
+            >
+              <button onClick={() => this.props.delete(x)}>Delete</button>
+              <span className="flag-icon flag-icon-gr">Flag</span>
               <label>Number Of Checks: </label>
-              <input type="text" onChange={event => console.log(event.target.value)}/>
+              <input
+                type="text"
+                onChange={event => console.log(event.target.value)}
+              />
               <label>Check Type</label>
               <select>
                 <option value="HTTP">HTTP</option>
@@ -106,18 +131,24 @@ class SonarCheck extends React.Component {
               </select>
               <label>Monitoring Locations</label>
               <button onClick={this.handleOpenModal}>Trigger Modal</button>
-        <ReactModal 
-           isOpen={this.state.showModal}
-           contentLabel="onRequestClose Example"
-           onRequestClose={this.handleCloseModal}
-        >
-          <p>Modal text!</p>
-          <button onClick={this.handleCloseModal}>Close Modal</button>
-          <label>USA</label>
-          <input id="us-check" type="checkbox" defaultChecked="true" onChange={(event) => this.handleChange(event)}/>
-          <label>UK</label>
-          <input id="uk-check" type="checkbox"/>
-        </ReactModal>
+              <ReactModal
+                isOpen={this.state.showModal}
+                contentLabel="onRequestClose Example"
+                onRequestClose={this.handleCloseModal}
+              >
+                <p>Modal text!</p>
+                <button onClick={this.handleCloseModal}>Close Modal</button>
+                <label>USA</label>
+                <input
+                  className="useu-check"
+                  id="US"
+                  type="checkbox"
+                  defaultChecked={this.state.defaultChecked_US}
+                  onChange={event => this.handleChange(event)}
+                />
+                <label>UK</label>
+                <input id="uk-check" type="checkbox" />
+              </ReactModal>
               <p>Check Number:{x}</p>
             </form>
           );
