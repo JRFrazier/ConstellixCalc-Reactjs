@@ -23,7 +23,7 @@ class SonarChecks extends React.Component {
         this.setState({
             checks: array
           }); 
-          console.log(this.state.checks)
+          console.log(key)
       }
       
       render() {
