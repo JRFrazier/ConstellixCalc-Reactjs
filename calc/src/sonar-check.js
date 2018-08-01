@@ -9,32 +9,15 @@ class SonarCheck extends React.Component {
     super();
     this.state = {
       showModal: false,
-      http_locations: {
-        na_eu: 0,
-        ap: 0,
-        oc: 0
-      },
-      https_locations: {
-        na_eu: 0,
-        ap: 0,
-        oc: 0
-      },
-      ftp_locations: {
-        na_eu: 0,
-        ap: 0,
-        oc: 0
-      },
-      tcp_locations: {
-        na_eu: 0,
-        ap: 0,
-        oc: 0
-      },
-      dns_locations: {
-        na_eu: 0,
-        ap: 0,
-        oc: 0
-      },
-      defaultChecked_US: false
+      na_eu: 0,
+      ap: 0,
+      oc: 0,
+      defaultChecked_US: false,
+      defaultChecked_UK: false,
+      http: false,
+      https: false,
+      tcp: false,
+      dns: false
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -51,25 +34,22 @@ class SonarCheck extends React.Component {
   }
 
   handleCloseModal() {
-    const element = document.getElementsByClassName("us-check");
-    element.defaultChecked = element.checked;
-    this.handleTotal();
     this.setState({ showModal: false });
-    console.log(element.checked);
+    console.log(this.state.na_eu)
   }
 
   handleChange(event) {
     const checkId = `defaultChecked_${event.target.id}`;
+    const checkClass = event.target.className;
     const newState = {};
     if (
-      event.target.className === "useu-check" &&
       event.target.checked === true
     ) {
-      const num = this.state.http_locations.na_eu + 1;
-      this.setState({
-        ...this.state,
-        http_locations: { ...this.state.http_locations, na_eu: num }
-      });
+      const num = this.state.na_eu + 1;
+      console.log(checkClass)
+      const checkState = {}
+      checkState[checkClass] = num;
+      this.setState(checkState);
       newState[checkId] = true;
       this.setState(newState);
       console.log(newState);
@@ -82,6 +62,7 @@ class SonarCheck extends React.Component {
       newState[checkId] = false;
       this.setState(newState);
     }
+    console.log(this.state.http_locations)
     console.log(event.target.checked);
   }
 
@@ -140,14 +121,20 @@ class SonarCheck extends React.Component {
                 <button onClick={this.handleCloseModal}>Close Modal</button>
                 <label>USA</label>
                 <input
-                  className="useu-check"
+                  className="na_eu"
                   id="US"
                   type="checkbox"
                   defaultChecked={this.state.defaultChecked_US}
                   onChange={event => this.handleChange(event)}
                 />
                 <label>UK</label>
-                <input id="uk-check" type="checkbox" />
+                <input 
+                  className="na_eu"
+                  id="UK" 
+                  type="checkbox"
+                  defaultChecked={this.state.defaultChecked_UK}
+                  onChange={event => this.handleChange(event)} 
+                />
               </ReactModal>
               <p>Check Number:{x}</p>
             </form>
