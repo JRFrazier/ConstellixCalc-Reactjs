@@ -12,8 +12,28 @@ class SonarCheck extends React.Component {
       na_eu: 0,
       ap: 0,
       oc: 0,
-      defaultChecked_US: false,
-      defaultChecked_UK: false,
+      defaultChecked_US_MI: false,
+      defaultChecked_US_NJ: false,
+      defaultChecked_US_GA: false,
+      defaultChecked_US_DC: false,
+      defaultChecked_US_NY: false,
+      defaultChecked_US_CA: false,
+      defaultChecked_US_WA: false,
+      defaultChecked_US_IL: false,
+      defaultChecked_US_TX: false,
+      defaultChecked_CA: false,
+      defaultChecked_EU_UK: false,
+      defaultChecked_EU_IT: false,
+      defaultChecked_EU_DEN: false,
+      defaultChecked_EU_DE: false,
+      defaultChecked_EU_AM: false,
+      defaultChecked_EU_FR: false,
+      defaultChecked_EU_AS: false,
+      defaultChecked_AP_SI: false,
+      defaultChecked_AP_IN: false,
+      defaultChecked_AP_JP: false,
+      defaultChecked_OC_NZ: false,
+      defaultChecked_OC_AU: false,
       http: false,
       https: false,
       tcp: false,
@@ -35,49 +55,29 @@ class SonarCheck extends React.Component {
 
   handleCloseModal() {
     this.setState({ showModal: false });
-    console.log(this.state.na_eu)
+    console.log(this.state);
   }
 
   handleChange(event) {
     const checkId = `defaultChecked_${event.target.id}`;
     const checkClass = event.target.className;
     const newState = {};
-    if (
-      event.target.checked === true
-    ) {
-      const num = this.state.na_eu + 1;
-      console.log(checkClass)
-      const checkState = {}
+    if (event.target.checked === true) {
+      const num = this.state[checkClass] + 1;
+      const checkState = {};
       checkState[checkClass] = num;
       this.setState(checkState);
       newState[checkId] = true;
       this.setState(newState);
-      console.log(newState);
     } else {
-      const num = this.state.http_locations.na_eu - 1;
-      this.setState({
-        ...this.state,
-        http_locations: { ...this.state.http_locations, na_eu: num }
-      });
+      const num = this.state[checkClass] - 1;
+      const checkState = {};
+      checkState[checkClass] = num;
+      this.setState(checkState);
       newState[checkId] = false;
       this.setState(newState);
     }
-    console.log(this.state.http_locations)
     console.log(event.target.checked);
-  }
-
-  modalExit(event) {
-    const modal = document.getElementById("myModal");
-    if (event === "Modal") {
-      modal.style.display = "none";
-    }
-    console.log(event);
-  }
-
-  modalButton() {
-    const modal = document.getElementById("myModal");
-
-    modal.style.display = "block";
   }
 
   render() {
@@ -119,22 +119,68 @@ class SonarCheck extends React.Component {
               >
                 <p>Modal text!</p>
                 <button onClick={this.handleCloseModal}>Close Modal</button>
-                <label>USA</label>
-                <input
-                  className="na_eu"
-                  id="US"
-                  type="checkbox"
-                  defaultChecked={this.state.defaultChecked_US}
-                  onChange={event => this.handleChange(event)}
-                />
-                <label>UK</label>
-                <input 
-                  className="na_eu"
-                  id="UK" 
-                  type="checkbox"
-                  defaultChecked={this.state.defaultChecked_UK}
-                  onChange={event => this.handleChange(event)} 
-                />
+                <div id="us_monitors">
+                  <h2>US Monitors</h2>
+                  <label>Toronto, Canada</label>
+                  <input
+                    className="na_eu"
+                    id="CA"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_CA}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <label>New York</label>
+                  <input
+                    className="na_eu"
+                    id="US_NY"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_US_NY}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <label>New Jersey</label>
+                  <input
+                    className="na_eu"
+                    id="US_NJ"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_US_NJ}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <label>Washington DC</label>
+                  <input
+                    className="na_eu"
+                    id="US_DC"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_US_DC}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <label>Georgia</label>
+                  <input
+                    className="na_eu"
+                    id="US_MI"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_US_GA}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <label>Miami Fl</label>
+                  <input
+                    className="na_eu"
+                    id="US_MI"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_US_MI}
+                    onChange={event => this.handleChange(event)}
+                  />
+                </div>
+                <div id="eu_monitors">
+                  <h2>Europe Monitors</h2>
+                  <label>UK</label>
+                  <input
+                    className="na_eu"
+                    id="UK"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_UK}
+                    onChange={event => this.handleChange(event)}
+                  />
+                </div>
               </ReactModal>
               <p>Check Number:{x}</p>
             </form>
