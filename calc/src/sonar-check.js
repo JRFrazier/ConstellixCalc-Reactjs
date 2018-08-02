@@ -32,17 +32,19 @@ class SonarCheck extends React.Component {
       defaultChecked_AP_SI: false,
       defaultChecked_AP_IN: false,
       defaultChecked_AP_JP: false,
+      defaultChecked_AP_HK: false,
       defaultChecked_OC_NZ: false,
       defaultChecked_OC_AU: false,
-      http: false,
-      https: false,
-      tcp: false,
-      dns: false
+      type_value: "HTTP",
+      check_int: 0,
+      check_policy: "Simultaneous" 
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleTotal = this.handleTotal.bind(this);
+    this.handleTypeChange = this.handleTypeChange.bind(this);
+    this.handlePolicyChange = this.handlePolicyChange.bind(this);
   }
 
   handleTotal() {
@@ -58,6 +60,7 @@ class SonarCheck extends React.Component {
     console.log(this.state);
   }
 
+  //Check Location Handler
   handleChange(event) {
     const checkId = `defaultChecked_${event.target.id}`;
     const checkClass = event.target.className;
@@ -80,6 +83,18 @@ class SonarCheck extends React.Component {
     console.log(event.target.checked);
   }
 
+  //Check Type Value Handler
+  handleTypeChange(event) {
+    console.log(event.target.value)
+    this.setState({type_value: event.target.value})
+  }
+
+  //Check Policy Handler
+  handlePolicyChange(event) {
+    console.log(event.target.value);
+    this.setState({check_policy: event.target.value})
+  }
+
   render() {
     return (
       <div>
@@ -98,15 +113,15 @@ class SonarCheck extends React.Component {
                 onChange={event => console.log(event.target.value)}
               />
               <label>Check Type</label>
-              <select>
+              <select value={this.state.type_value} onChange={this.handleTypeChange}>
                 <option value="HTTP">HTTP</option>
-                <option value="HTTPS">DNS</option>
+                <option value="HTTPS">HTTPS</option>
                 <option value="TCP">TCP</option>
                 <option value="DNS">DNS</option>
                 <option value="Watterfall">Watterfall</option>
               </select>
               <label>Check Policy</label>
-              <select>
+              <select value={this.state.check_policy} onChange={this.handlePolicyChange} >
                 <option value="Simultaneous">Simultaneous</option>
                 <option value="Once Per Site">Once Per Site</option>
               </select>
@@ -120,7 +135,7 @@ class SonarCheck extends React.Component {
                 <p>Modal text!</p>
                 <button onClick={this.handleCloseModal}>Close Modal</button>
                 <div id="us_monitors">
-                  <h2>US Monitors</h2>
+                  <h3>US Monitors</h3>
                   <label>Toronto, Canada</label>
                   <input
                     className="na_eu"
@@ -171,13 +186,111 @@ class SonarCheck extends React.Component {
                   />
                 </div>
                 <div id="eu_monitors">
-                  <h2>Europe Monitors</h2>
+                  <h3>Europe Monitors</h3>
                   <label>UK</label>
                   <input
                     className="na_eu"
-                    id="UK"
+                    id="EU_UK"
                     type="checkbox"
-                    defaultChecked={this.state.defaultChecked_UK}
+                    defaultChecked={this.state.defaultChecked_EU_UK}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <label>Amsterdam</label>
+                  <input
+                    className="na_eu"
+                    id="EU_AM"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_EU_AM}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <label>France</label>
+                  <input
+                    className="na_eu"
+                    id="EU_FR"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_EU_FR}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <label>Germany</label>
+                  <input
+                    className="na_eu"
+                    id="EU_DE"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_EU_DE}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <label>Italy</label>
+                  <input
+                    className="na_eu"
+                    id="EU_IT"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_EU_IT}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <label>Austria</label>
+                  <input
+                    className="na_eu"
+                    id="EU_AS"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_EU_AS}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <label>Denmark</label>
+                  <input
+                    className="na_eu"
+                    id="EU_DEN"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_EU_DEN}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <h3>Asia Pacific</h3>
+                  <label>India</label>
+                  <input
+                    className="ap"
+                    id="AP_IN"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_AP_IN}
+                    onChange={event => this.handleChange(event)}
+                  /> 
+                  <label>Hong Kong</label>
+                  <input
+                    className="ap"
+                    id="AP_HK"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_AP_HK}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <label>Singapore</label>
+                  <input
+                    className="ap"
+                    id="AP_SI"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_AP_SI}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <label>Japan</label>
+                  <input
+                    className="ap"
+                    id="AP_JP"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_AP_JP}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <h3>Oceania</h3>
+                  <label>Australia</label>
+                  <input
+                    className="oc"
+                    id="OC_AU"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_OC_AU}
+                    onChange={event => this.handleChange(event)}
+                  />
+                  <label>New Zealand</label>
+                  <input
+                    className="oc"
+                    id="OC_NZ"
+                    type="checkbox"
+                    defaultChecked={this.state.defaultChecked_OC_NZ}
                     onChange={event => this.handleChange(event)}
                   />
                 </div>
