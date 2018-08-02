@@ -35,20 +35,13 @@ class SonarCheck extends React.Component {
       defaultChecked_AP_HK: false,
       defaultChecked_OC_NZ: false,
       defaultChecked_OC_AU: false,
-      type_value: "HTTP",
       check_int: 0,
-      check_policy: "Simultaneous" 
+      check_policy: "Simultaneous"
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleTotal = this.handleTotal.bind(this);
-    this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handlePolicyChange = this.handlePolicyChange.bind(this);
-  }
-
-  handleTotal() {
-    console.log(this.state.http_locations);
   }
 
   handleOpenModal() {
@@ -84,15 +77,12 @@ class SonarCheck extends React.Component {
   }
 
   //Check Type Value Handler
-  handleTypeChange(event) {
-    console.log(event.target.value)
-    this.setState({type_value: event.target.value})
-  }
+  handleTypeChange(event) {}
 
   //Check Policy Handler
   handlePolicyChange(event) {
     console.log(event.target.value);
-    this.setState({check_policy: event.target.value})
+    this.setState({ check_policy: event.target.value });
   }
 
   render() {
@@ -113,7 +103,11 @@ class SonarCheck extends React.Component {
                 onChange={event => console.log(event.target.value)}
               />
               <label>Check Type</label>
-              <select value={this.state.type_value} onChange={this.handleTypeChange}>
+              <select
+                id="check_type"
+                value={this.props.check_type}
+                onChange={this.props.changeListener}
+              >
                 <option value="HTTP">HTTP</option>
                 <option value="HTTPS">HTTPS</option>
                 <option value="TCP">TCP</option>
@@ -121,7 +115,10 @@ class SonarCheck extends React.Component {
                 <option value="Watterfall">Watterfall</option>
               </select>
               <label>Check Policy</label>
-              <select value={this.state.check_policy} onChange={this.handlePolicyChange} >
+              <select
+                value={this.state.check_policy}
+                onChange={this.handlePolicyChange}
+              >
                 <option value="Simultaneous">Simultaneous</option>
                 <option value="Once Per Site">Once Per Site</option>
               </select>
@@ -251,7 +248,7 @@ class SonarCheck extends React.Component {
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_AP_IN}
                     onChange={event => this.handleChange(event)}
-                  /> 
+                  />
                   <label>Hong Kong</label>
                   <input
                     className="ap"
