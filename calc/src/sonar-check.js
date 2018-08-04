@@ -36,16 +36,19 @@ class SonarCheck extends React.Component {
       defaultChecked_OC_NZ: false,
       defaultChecked_OC_AU: false,
       check_int: 0,
-      check_policy: "Simultaneous"
+      crazyState: 0
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handlePolicyChange = this.handlePolicyChange.bind(this);
+    this.handleThisChange = this.handleThisChange.bind(this);
   }
 
-  handleOpenModal() {
-    this.setState({ showModal: true });
+  handleOpenModal(event) {
+    const modalId = event.target.id;
+    this.setState({ showModal: true, modalId: modalId });
+    console.log(modalId);
   }
 
   handleCloseModal() {
@@ -56,6 +59,7 @@ class SonarCheck extends React.Component {
   //Check Location Handler
   handleChange(event) {
     const checkId = `defaultChecked_${event.target.id}`;
+    const checkId2 = event.target.id;
     const checkClass = event.target.className;
     const newState = {};
     if (event.target.checked === true) {
@@ -73,11 +77,14 @@ class SonarCheck extends React.Component {
       newState[checkId] = false;
       this.setState(newState);
     }
-    console.log(event.target.checked);
+    console.log(checkId);
   }
 
   //Check Type Value Handler
-  handleTypeChange(event) {}
+  handleThisChange(event) {
+    this.setState({ crazyState: 9 });
+    console.log(this.state);
+  }
 
   //Check Policy Handler
   handlePolicyChange(event) {
@@ -100,7 +107,10 @@ class SonarCheck extends React.Component {
               <label>Number Of Checks: </label>
               <input
                 type="text"
-                onChange={event => console.log(event.target.value)}
+                onChange={event => {
+                  this.handleThisChange(event);
+                  console.log(this.state);
+                }}
               />
               <label>Check Type</label>
               <select
@@ -115,16 +125,16 @@ class SonarCheck extends React.Component {
                 <option value="Watterfall">Watterfall</option>
               </select>
               <label>Check Policy</label>
-              <select
-                value={this.state.check_policy}
-                onChange={this.handlePolicyChange}
-              >
+              <select onChange={this.handlePolicyChange}>
                 <option value="Simultaneous">Simultaneous</option>
                 <option value="Once Per Site">Once Per Site</option>
               </select>
               <label>Monitoring Locations</label>
-              <button onClick={this.handleOpenModal}>Trigger Modal</button>
+              <button id={x} onClick={this.handleOpenModal}>
+                Trigger Modal
+              </button>
               <ReactModal
+                key={x}
                 isOpen={this.state.showModal}
                 contentLabel="onRequestClose Example"
                 onRequestClose={this.handleCloseModal}
@@ -136,15 +146,16 @@ class SonarCheck extends React.Component {
                   <label>Toronto, Canada</label>
                   <input
                     className="na_eu"
-                    id="CA"
+                    id={`CA_${x}`}
                     type="checkbox"
-                    defaultChecked={this.state.defaultChecked_CA}
-                    onChange={event => this.handleChange(event)}
+                    onChange={event => {
+                      this.handleChange(event);
+                    }}
                   />
                   <label>New York</label>
                   <input
                     className="na_eu"
-                    id="US_NY"
+                    id={`US_NY_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_US_NY}
                     onChange={event => this.handleChange(event)}
@@ -152,7 +163,7 @@ class SonarCheck extends React.Component {
                   <label>New Jersey</label>
                   <input
                     className="na_eu"
-                    id="US_NJ"
+                    id={`US_NJ_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_US_NJ}
                     onChange={event => this.handleChange(event)}
@@ -160,7 +171,7 @@ class SonarCheck extends React.Component {
                   <label>Washington DC</label>
                   <input
                     className="na_eu"
-                    id="US_DC"
+                    id={`US_DC_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_US_DC}
                     onChange={event => this.handleChange(event)}
@@ -168,7 +179,7 @@ class SonarCheck extends React.Component {
                   <label>Georgia</label>
                   <input
                     className="na_eu"
-                    id="US_MI"
+                    id={`US_MI_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_US_GA}
                     onChange={event => this.handleChange(event)}
@@ -176,7 +187,7 @@ class SonarCheck extends React.Component {
                   <label>Miami Fl</label>
                   <input
                     className="na_eu"
-                    id="US_MI"
+                    id={`US_MI_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_US_MI}
                     onChange={event => this.handleChange(event)}
@@ -187,7 +198,7 @@ class SonarCheck extends React.Component {
                   <label>UK</label>
                   <input
                     className="na_eu"
-                    id="EU_UK"
+                    id={`EU_UK_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_EU_UK}
                     onChange={event => this.handleChange(event)}
@@ -195,7 +206,7 @@ class SonarCheck extends React.Component {
                   <label>Amsterdam</label>
                   <input
                     className="na_eu"
-                    id="EU_AM"
+                    id={`EU_AM_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_EU_AM}
                     onChange={event => this.handleChange(event)}
@@ -203,7 +214,7 @@ class SonarCheck extends React.Component {
                   <label>France</label>
                   <input
                     className="na_eu"
-                    id="EU_FR"
+                    id={`EU_FR_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_EU_FR}
                     onChange={event => this.handleChange(event)}
@@ -211,7 +222,7 @@ class SonarCheck extends React.Component {
                   <label>Germany</label>
                   <input
                     className="na_eu"
-                    id="EU_DE"
+                    id={`EU_DE_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_EU_DE}
                     onChange={event => this.handleChange(event)}
@@ -219,7 +230,7 @@ class SonarCheck extends React.Component {
                   <label>Italy</label>
                   <input
                     className="na_eu"
-                    id="EU_IT"
+                    id={`EU_IT_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_EU_IT}
                     onChange={event => this.handleChange(event)}
@@ -227,7 +238,7 @@ class SonarCheck extends React.Component {
                   <label>Austria</label>
                   <input
                     className="na_eu"
-                    id="EU_AS"
+                    id={`EU_AS_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_EU_AS}
                     onChange={event => this.handleChange(event)}
@@ -235,7 +246,7 @@ class SonarCheck extends React.Component {
                   <label>Denmark</label>
                   <input
                     className="na_eu"
-                    id="EU_DEN"
+                    id={`EU_DEN_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_EU_DEN}
                     onChange={event => this.handleChange(event)}
@@ -244,7 +255,7 @@ class SonarCheck extends React.Component {
                   <label>India</label>
                   <input
                     className="ap"
-                    id="AP_IN"
+                    id={`AP_IN_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_AP_IN}
                     onChange={event => this.handleChange(event)}
@@ -252,7 +263,7 @@ class SonarCheck extends React.Component {
                   <label>Hong Kong</label>
                   <input
                     className="ap"
-                    id="AP_HK"
+                    id={`AP_HK_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_AP_HK}
                     onChange={event => this.handleChange(event)}
@@ -260,7 +271,7 @@ class SonarCheck extends React.Component {
                   <label>Singapore</label>
                   <input
                     className="ap"
-                    id="AP_SI"
+                    id={`AP_SI_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_AP_SI}
                     onChange={event => this.handleChange(event)}
@@ -268,7 +279,7 @@ class SonarCheck extends React.Component {
                   <label>Japan</label>
                   <input
                     className="ap"
-                    id="AP_JP"
+                    id={`AP_JP_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_AP_JP}
                     onChange={event => this.handleChange(event)}
@@ -277,7 +288,7 @@ class SonarCheck extends React.Component {
                   <label>Australia</label>
                   <input
                     className="oc"
-                    id="OC_AU"
+                    id={`OC_AU_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_OC_AU}
                     onChange={event => this.handleChange(event)}
@@ -285,7 +296,7 @@ class SonarCheck extends React.Component {
                   <label>New Zealand</label>
                   <input
                     className="oc"
-                    id="OC_NZ"
+                    id={`OC_NZ_${x}`}
                     type="checkbox"
                     defaultChecked={this.state.defaultChecked_OC_NZ}
                     onChange={event => this.handleChange(event)}
