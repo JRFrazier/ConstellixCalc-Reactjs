@@ -4,6 +4,14 @@ import ReactModal from "react-modal";
 //Model Element
 ReactModal.setAppElement("#root");
 
+class SonarLocations extends React.Component {
+  render() {
+    const locations = this.props.checkLocations;
+    return (
+      
+    )
+}
+
 class SonarCheck extends React.Component {
   constructor() {
     super();
@@ -47,13 +55,13 @@ class SonarCheck extends React.Component {
 
   handleOpenModal(event) {
     const modalId = event.target.id;
-    this.setState({ showModal: true, modalId: modalId });
-    console.log(modalId);
+    this.setState({ showModal: true });
+    console.log(this.props.checkLocations);
   }
 
-  handleCloseModal() {
+  handleCloseModal(event) {
     this.setState({ showModal: false });
-    console.log(this.state);
+    console.log(event);
   }
 
   //Check Location Handler
@@ -141,7 +149,9 @@ class SonarCheck extends React.Component {
               >
                 <p>Modal text!</p>
                 <button onClick={this.handleCloseModal}>Close Modal</button>
-                <div id="us_monitors">
+                <SonarLocations />
+
+                {/* <div id="us_monitors">
                   <h3>US Monitors</h3>
                   <label>Toronto, Canada</label>
                   <input
@@ -301,7 +311,7 @@ class SonarCheck extends React.Component {
                     defaultChecked={this.state.defaultChecked_OC_NZ}
                     onChange={event => this.handleChange(event)}
                   />
-                </div>
+                </div> */}
               </ReactModal>
               <p>Check Number:{x}</p>
             </form>

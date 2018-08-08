@@ -18,8 +18,10 @@ class SonarChecks extends React.Component {
           this.state.checks[this.state.checks.length - 1] + 1
         )
       : this.state.checks.concat(this.state.checks.length + 1);
-    this.setState({ checks: num });
-    console.log(this.state.num);
+    const number = num.length;
+    const locations = { Toronto_Canada: false };
+    this.setState({ checks: num, checkLocations: locations });
+    console.log(num.length);
   }
 
   deleteCheck(key) {
@@ -52,6 +54,7 @@ class SonarChecks extends React.Component {
         </button>
         <div id="sonar-fields">
           <SonarCheck
+            checkLocations={this.state.checkLocations}
             className={"sonar-calc"}
             delete={key => this.deleteCheck(key)}
             value={this.state.checks}
