@@ -5,11 +5,47 @@ import ReactModal from "react-modal";
 ReactModal.setAppElement("#root");
 
 class SonarLocations extends React.Component {
-  render() {
-    const locations = this.props.checkLocations;
+  constructor () {
+    super();
+    this.state = {
+
+    }
+  };
+
+
+
+  Locations() {
+    const foo = this.props.theState.checks[this.props.checkNumber - 1][`check_${this.props.checkNumber}`]["checkLocations"]
+    for (const key in foo) {
+      console.log(key)
+    }
+    console.log(foo)
+    console.log(this.props.theState)
+    const obj = this.props.theState.checks[this.props.checkNumber - 1][`check_${this.props.checkNumber}`]["checkLocations"]
+    const usLocations = for (const key in )
     return (
-      
+      <div>
+      {locations.map(x => {
+        return(
+          <div>
+            <h3>{x}</h3>
+            <label>Toronto, Canada</label>
+            <input
+              className="na_eu"
+              type="checkbox"
+            />
+          </div>
+        )
+      })}
+      </div> 
     )
+  }
+
+  render() {
+    return (
+      this.Locations()
+    )
+  }
 }
 
 class SonarCheck extends React.Component {
@@ -18,33 +54,7 @@ class SonarCheck extends React.Component {
     this.state = {
       showModal: false,
       na_eu: 0,
-      ap: 0,
-      oc: 0,
-      defaultChecked_US_MI: false,
-      defaultChecked_US_NJ: false,
-      defaultChecked_US_GA: false,
-      defaultChecked_US_DC: false,
-      defaultChecked_US_NY: false,
-      defaultChecked_US_CA: false,
-      defaultChecked_US_WA: false,
-      defaultChecked_US_IL: false,
-      defaultChecked_US_TX: false,
-      defaultChecked_CA: false,
-      defaultChecked_EU_UK: false,
-      defaultChecked_EU_IT: false,
-      defaultChecked_EU_DEN: false,
-      defaultChecked_EU_DE: false,
-      defaultChecked_EU_AM: false,
-      defaultChecked_EU_FR: false,
-      defaultChecked_EU_AS: false,
-      defaultChecked_AP_SI: false,
-      defaultChecked_AP_IN: false,
-      defaultChecked_AP_JP: false,
-      defaultChecked_AP_HK: false,
-      defaultChecked_OC_NZ: false,
-      defaultChecked_OC_AU: false,
       check_int: 0,
-      crazyState: 0
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -56,7 +66,9 @@ class SonarCheck extends React.Component {
   handleOpenModal(event) {
     const modalId = event.target.id;
     this.setState({ showModal: true });
-    console.log(this.props.checkLocations);
+    //splitting up the state to grab the check locations state
+    const checkLocations = this.props.theState;
+    console.log(checkLocations[`checkLocations_${modalId}`]);
   }
 
   handleCloseModal(event) {
@@ -67,7 +79,6 @@ class SonarCheck extends React.Component {
   //Check Location Handler
   handleChange(event) {
     const checkId = `defaultChecked_${event.target.id}`;
-    const checkId2 = event.target.id;
     const checkClass = event.target.className;
     const newState = {};
     if (event.target.checked === true) {
@@ -90,7 +101,6 @@ class SonarCheck extends React.Component {
 
   //Check Type Value Handler
   handleThisChange(event) {
-    this.setState({ crazyState: 9 });
     console.log(this.state);
   }
 
@@ -149,7 +159,7 @@ class SonarCheck extends React.Component {
               >
                 <p>Modal text!</p>
                 <button onClick={this.handleCloseModal}>Close Modal</button>
-                <SonarLocations />
+                <SonarLocations checkNumber={x} theState={this.props.theState}/> 
 
                 {/* <div id="us_monitors">
                   <h3>US Monitors</h3>
