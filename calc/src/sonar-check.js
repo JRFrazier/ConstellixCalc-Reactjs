@@ -5,27 +5,31 @@ import ReactModal from "react-modal";
 ReactModal.setAppElement("#root");
 
 class SonarLocations extends React.Component {
-  constructor () {
+  constructor() {
     super();
-    this.state = {
-
-    }
-  };
-
-
+    this.state = {};
+  }
 
   Locations() {
-    const foo = this.props.theState.checks[this.props.checkNumber - 1][`check_${this.props.checkNumber}`]["checkLocations"]
+    const foo = this.props.theState.checks[this.props.checkNumber - 1][
+      `check_${this.props.checkNumber}`
+    ]["checkLocations"];
     for (const key in foo) {
-      console.log(key)
     }
-    console.log(foo)
-    console.log(this.props.theState)
-    const obj = this.props.theState.checks[this.props.checkNumber - 1][`check_${this.props.checkNumber}`]["checkLocations"]
-    const usLocations = for (const key in )
+    const obj = this.props.theState.checks[this.props.checkNumber - 1][
+      `check_${this.props.checkNumber}`
+    ]["checkLocations"];
+    const usLocations = [];
+
+    for (const key in obj) {
+      if (key === "United_States")
+        for (const x in key) {
+          console.log(key);
+        }
+    }
     return (
       <div>
-      {locations.map(x => {
+        {/*{locations.map(x => {
         return(
           <div>
             <h3>{x}</h3>
@@ -36,15 +40,13 @@ class SonarLocations extends React.Component {
             />
           </div>
         )
-      })}
-      </div> 
-    )
+      })}*/}
+      </div>
+    );
   }
 
   render() {
-    return (
-      this.Locations()
-    )
+    return this.Locations();
   }
 }
 
@@ -54,7 +56,7 @@ class SonarCheck extends React.Component {
     this.state = {
       showModal: false,
       na_eu: 0,
-      check_int: 0,
+      check_int: 0
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -159,7 +161,10 @@ class SonarCheck extends React.Component {
               >
                 <p>Modal text!</p>
                 <button onClick={this.handleCloseModal}>Close Modal</button>
-                <SonarLocations checkNumber={x} theState={this.props.theState}/> 
+                <SonarLocations
+                  checkNumber={x}
+                  theState={this.props.theState}
+                />
 
                 {/* <div id="us_monitors">
                   <h3>US Monitors</h3>
@@ -323,7 +328,10 @@ class SonarCheck extends React.Component {
                   />
                 </div> */}
               </ReactModal>
-              <p>Check Number:{x}</p>
+              <p>
+                Check Number:
+                {x}
+              </p>
             </form>
           );
         })}
