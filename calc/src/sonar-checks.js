@@ -8,7 +8,7 @@ class SonarChecks extends React.Component {
     this.deleteCheck = this.deleteCheck.bind(this);
     this.state = {
       check_number: [],
-      checks: [] 
+      checks: []
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -18,26 +18,27 @@ class SonarChecks extends React.Component {
           this.state.check_number[this.state.check_number.length - 1] + 1
         )
       : this.state.check_number.concat(this.state.check_number.length + 1);
-    
+
     /*this.state.checks[0] 
         ? this.state.checks.concat(
           this.state.checks[this.state.checks.length - 1] = obj
           )
         : this.state.checks.concat(obj)*/
     const number = num.length;
-    const obj = {}
+    const obj = {};
     obj[`check_${number}`] = {
       checkType: "HTTP",
-      checkLocations:{
-        United_States: {Toronto_Canada: false},
-        Europe: {London_Great_Britain: false},
-        Asia_Pacific: {Hong_Kong: false},
-        Oceania: {Sydney_Australia: false}
-  }}
+      checkLocations: {
+        United_States: { Toronto_Canada: false, New_York_NY: false },
+        Europe: { London_Great_Britain: false },
+        Asia_Pacific: { Hong_Kong: false },
+        Oceania: { Sydney_Australia: false }
+      }
+    };
     const check = this.state.checks.concat(obj);
     this.setState({ check_number: num });
-    this.setState({checks: check})
-    console.log(this.state)
+    this.setState({ checks: check });
+    console.log(this.state);
   }
 
   deleteCheck(key) {

@@ -22,25 +22,30 @@ class SonarLocations extends React.Component {
     const usLocations = [];
 
     for (const key in obj) {
-      if (key === "United_States")
-        for (const x in key) {
-          console.log(key);
+      if (key === "United_States") {
+        const newObj = obj[key];
+        for (const x in newObj) {
+          const y = x.split("_");
+          if (y.length > 2) {
+            y.splice(2, 0, `,`);
+            usLocations.push(y.join(" "));
+          } else {
+            usLocations.push(y.join(", "));
+          }
         }
+      }
     }
     return (
       <div>
-        {/*{locations.map(x => {
-        return(
-          <div>
-            <h3>{x}</h3>
-            <label>Toronto, Canada</label>
-            <input
-              className="na_eu"
-              type="checkbox"
-            />
-          </div>
-        )
-      })}*/}
+        <h3>North America</h3>
+        {usLocations.map(x => {
+          return (
+            <div key={x}>
+              <label>{x}</label>
+              <input className="na_eu" type="checkbox" />
+            </div>
+          );
+        })}
       </div>
     );
   }
