@@ -12,6 +12,7 @@ class SonarChecks extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   addCheck() {
     const num = this.state.check_number[0]
       ? this.state.check_number.concat(
@@ -29,7 +30,21 @@ class SonarChecks extends React.Component {
     obj[`check_${number}`] = {
       checkType: "HTTP",
       checkLocations: {
-        United_States: { Toronto_Canada: false, New_York_NY: false },
+        United_States: {
+          Toronto_Canada: false,
+          New_York_NY: false,
+          Newark_NJ: false,
+          Chicago_IL: false,
+          Washington_DC: false,
+          Atlanta_GA: false,
+          Miami_FL: false,
+          Dallas_TX: false,
+          Seattle_WA: false,
+          Fremont_CA: false,
+          San_Francisco_CA: false,
+          Los_Angeles_CA: false,
+          San_Jose_CA: false
+        },
         Europe: { London_Great_Britain: false },
         Asia_Pacific: { Hong_Kong: false },
         Oceania: { Sydney_Australia: false }

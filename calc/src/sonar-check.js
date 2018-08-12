@@ -19,7 +19,11 @@ class SonarLocations extends React.Component {
     const obj = this.props.theState.checks[this.props.checkNumber - 1][
       `check_${this.props.checkNumber}`
     ]["checkLocations"];
+
     const usLocations = [];
+    const euLocations = [];
+    const apLocations = [];
+    const ocLocations = [];
 
     for (const key in obj) {
       if (key === "United_States") {
@@ -33,12 +37,72 @@ class SonarLocations extends React.Component {
             usLocations.push(y.join(", "));
           }
         }
+      } else if (key === "Europe") {
+        const newObj = obj[key];
+        for (const x in newObj) {
+          const y = x.split("_");
+          if (y.length > 2) {
+            y.splice(2, 0, `,`);
+            euLocations.push(y.join(" "));
+          } else {
+            euLocations.push(y.join(", "));
+          }
+        }
+      } else if (key === "Asia_Pacific") {
+        const newObj = obj[key];
+        for (const x in newObj) {
+          const y = x.split("_");
+          if (y.length > 2) {
+            y.splice(2, 0, `,`);
+            apLocations.push(y.join(" "));
+          } else {
+            apLocations.push(y.join(", "));
+          }
+        }
+      } else {
+        const newObj = obj[key];
+        for (const x in newObj) {
+          const y = x.split("_");
+          if (y.length > 2) {
+            y.splice(2, 0, `,`);
+            ocLocations.push(y.join(" "));
+          } else {
+            ocLocations.push(y.join(", "));
+          }
+        }
       }
     }
     return (
       <div>
         <h3>North America</h3>
         {usLocations.map(x => {
+          return (
+            <div key={x}>
+              <label>{x}</label>
+              <input className="na_eu" type="checkbox" />
+            </div>
+          );
+        })}
+        <h3>Europe</h3>
+        {euLocations.map(x => {
+          return (
+            <div key={x}>
+              <label>{x}</label>
+              <input className="na_eu" type="checkbox" />
+            </div>
+          );
+        })}
+        <h3>Asia Pacific</h3>
+        {apLocations.map(x => {
+          return (
+            <div key={x}>
+              <label>{x}</label>
+              <input className="na_eu" type="checkbox" />
+            </div>
+          );
+        })}
+        <h3>Oceania</h3>
+        {ocLocations.map(x => {
           return (
             <div key={x}>
               <label>{x}</label>
