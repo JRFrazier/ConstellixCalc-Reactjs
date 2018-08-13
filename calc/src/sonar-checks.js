@@ -67,10 +67,8 @@ class SonarChecks extends React.Component {
   }
 
   handleChange(event) {
-    const newState = {};
-    newState[event.target.id] = event.target.value;
-    this.setState(newState);
-    console.log(newState);
+    //Check Locations
+    console.log(event);
   }
 
   render() {
