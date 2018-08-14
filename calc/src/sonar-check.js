@@ -10,10 +10,8 @@ class SonarLocations extends React.Component {
     this.state = {};
   }
 
-  handleChange(location, number) {
-    this.props.changeListener(
-      location, number
-    );
+  handleChange(event) {
+    this.props.changeListener(event, this.props.checkNumber);
   }
 
   Locations() {
@@ -21,21 +19,20 @@ class SonarLocations extends React.Component {
       `check_${this.props.checkNumber}`
     ]["checkLocations"];
 
-
     const usLocations = [];
     const euLocations = [];
     const apLocations = [];
     const ocLocations = [];
 
     for (const key in obj) {
-      if (key === "United_States") {
+      if (key === "North_America") {
         const newObj = obj[key];
         for (const x in newObj) {
           const y = x.split("_");
           if (y.length > 2) {
-            y.splice(2, 0, ', ' )
-            y.splice(1, 0, ' ')
-            usLocations.push(y.join(''))
+            y.splice(2, 0, ", ");
+            y.splice(1, 0, " ");
+            usLocations.push(y.join(""));
           } else {
             usLocations.push(y.join(", "));
           }
@@ -80,15 +77,15 @@ class SonarLocations extends React.Component {
       <div>
         <h3>North America</h3>
         {usLocations.map(x => {
-          console.log(x)
+          console.log(x);
           return (
             <div key={x}>
               <label>{x}</label>
               <input
-                className="na_eu"
+                className="North_America"
                 id={x.replace(/,/g, "").replace(/ /g, "_")}
                 type="checkbox"
-                onChange={() => this.handleChange("United_States", this.props.checkNumber)}
+                onChange={event => this.handleChange(event)}
               />
             </div>
           );

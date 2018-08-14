@@ -30,7 +30,7 @@ class SonarChecks extends React.Component {
     obj[`check_${number}`] = {
       checkType: "HTTP",
       checkLocations: {
-        United_States: {
+        North_America: {
           Toronto_Canada: false,
           New_York_NY: false,
           Newark_NJ: false,
@@ -66,9 +66,9 @@ class SonarChecks extends React.Component {
     console.log(key);
   }
 
-  handleChange(location, number) {
+  handleChange(event, number) {
     //Check Locations
-    console.log(location);
+    console.log(event.target.className);
     console.log(number);
   }
 
@@ -90,7 +90,7 @@ class SonarChecks extends React.Component {
             delete={key => this.deleteCheck(key)}
             value={this.state.check_number}
             check_type={this.state.check_type}
-            changeListener={(x,y) => this.handleChange(x,y)}
+            changeListener={(x, y) => this.handleChange(x, y)}
           />
         </div>
       </div>
