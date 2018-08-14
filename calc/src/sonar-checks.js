@@ -66,9 +66,10 @@ class SonarChecks extends React.Component {
     console.log(key);
   }
 
-  handleChange(event) {
+  handleChange(location, number) {
     //Check Locations
-    console.log(event);
+    console.log(location);
+    console.log(number);
   }
 
   render() {
@@ -89,7 +90,7 @@ class SonarChecks extends React.Component {
             delete={key => this.deleteCheck(key)}
             value={this.state.check_number}
             check_type={this.state.check_type}
-            changeListener={value => this.handleChange(value)}
+            changeListener={(x,y) => this.handleChange(x,y)}
           />
         </div>
       </div>
