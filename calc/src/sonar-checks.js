@@ -68,8 +68,14 @@ class SonarChecks extends React.Component {
 
   handleChange(event, number) {
     //Check Locations
-    console.log(event.target.className);
-    console.log(number);
+    const x = {};
+    const y = (x["checks"] = []);
+    const checkNum = (y[number - 1] = {});
+    const checkLoc = (checkNum[`check_${number}`] = {});
+    const checkReg = (checkLoc["checkLocations"] = {});
+    const checkCntry = (checkReg[event.target.className] = {});
+    checkCntry[event.target.id] = true;
+    //above need fixen :/
   }
 
   render() {

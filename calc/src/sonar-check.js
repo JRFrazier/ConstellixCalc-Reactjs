@@ -72,12 +72,10 @@ class SonarLocations extends React.Component {
         }
       }
     }
-    console.log(usLocations);
     return (
       <div>
         <h3>North America</h3>
         {usLocations.map(x => {
-          console.log(x);
           return (
             <div key={x}>
               <label>{x}</label>
