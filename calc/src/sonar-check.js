@@ -11,12 +11,12 @@ class SonarLocations extends React.Component {
   }
 
   handleChange(event) {
-    this.props.changeListener(event, this.props.checkNumber);
+    this.props.changeListener(event);
   }
 
   Locations() {
     const obj = this.props.theState.checks[this.props.checkNumber - 1][
-      `check_${this.props.checkNumber}`
+      "check"
     ]["checkLocations"];
 
     const usLocations = [];
@@ -82,6 +82,7 @@ class SonarLocations extends React.Component {
               <input
                 className="North_America"
                 id={x.replace(/,/g, "").replace(/ /g, "_")}
+                index="1"
                 type="checkbox"
                 onChange={event => this.handleChange(event)}
               />

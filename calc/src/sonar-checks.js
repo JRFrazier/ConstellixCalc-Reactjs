@@ -25,9 +25,9 @@ class SonarChecks extends React.Component {
           this.state.checks[this.state.checks.length - 1] = obj
           )
         : this.state.checks.concat(obj)*/
-    const number = num.length;
     const obj = {};
-    obj[`check_${number}`] = {
+    obj["check"] = {
+      checkNum: num,
       checkType: "HTTP",
       checkLocations: {
         North_America: {
@@ -66,15 +66,10 @@ class SonarChecks extends React.Component {
     console.log(key);
   }
 
-  handleChange(event, number) {
+  handleChange(event) {
     //Check Locations
-    const x = {};
-    const y = (x["checks"] = []);
-    const checkNum = (y[number - 1] = {});
-    const checkLoc = (checkNum[`check_${number}`] = {});
-    const checkReg = (checkLoc["checkLocations"] = {});
-    const checkCntry = (checkReg[event.target.className] = {});
-    checkCntry[event.target.id] = true;
+    const a = [...this.state.checks]
+    console.log(event.target.index);
     //above need fixen :/
   }
 
