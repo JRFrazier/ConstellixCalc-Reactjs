@@ -27,7 +27,6 @@ class SonarChecks extends React.Component {
         : this.state.checks.concat(obj)*/
     const obj = {};
     obj["check"] = {
-      checkNum: num,
       checkType: "HTTP",
       checkLocations: {
         North_America: {
@@ -68,8 +67,13 @@ class SonarChecks extends React.Component {
 
   handleChange(event) {
     //Check Locations
-    const a = [...this.state.checks]
-    console.log(event.target.index);
+    const x = this.state.checks;
+    const obj = {};
+    obj["checks"] = x;
+    const checks = obj["checks"];
+    let a = Object.assign({}, checks[0]);
+    a["check"]["checkLocations"]["North_America"]["Toronto_Canada"] = true;
+    this.setState(obj);
     //above need fixen :/
   }
 

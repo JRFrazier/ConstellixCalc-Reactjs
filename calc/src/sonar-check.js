@@ -12,12 +12,13 @@ class SonarLocations extends React.Component {
 
   handleChange(event) {
     this.props.changeListener(event);
+    console.log(this.props.checkNumber);
   }
 
   Locations() {
-    const obj = this.props.theState.checks[this.props.checkNumber - 1][
-      "check"
-    ]["checkLocations"];
+    const obj = this.props.theState.checks[this.props.checkNumber - 1]["check"][
+      "checkLocations"
+    ];
 
     const usLocations = [];
     const euLocations = [];
@@ -145,12 +146,12 @@ class SonarCheck extends React.Component {
     this.setState({ showModal: true });
     //splitting up the state to grab the check locations state
     const checkLocations = this.props.theState;
-    console.log(checkLocations[`checkLocations_${modalId}`]);
+    console.log(event.target.id);
   }
 
   handleCloseModal(event) {
     this.setState({ showModal: false });
-    console.log(event);
+    console.log(this.props.theState);
   }
 
   //Check Location Handler
