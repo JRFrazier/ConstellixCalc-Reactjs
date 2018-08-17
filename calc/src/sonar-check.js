@@ -12,11 +12,11 @@ class SonarLocations extends React.Component {
 
   handleChange(event) {
     this.props.changeListener(event);
-    console.log(this.props.checkNumber);
   }
 
   Locations() {
-    const obj = this.props.theState.checks[this.props.checkNumber - 1]["check"][
+    console.log("\n\n", this.props.check, "check number is", this.props.checkNumber)
+    const obj = this.props.check["check"][
       "checkLocations"
     ];
 
@@ -188,6 +188,11 @@ class SonarCheck extends React.Component {
     this.setState({ check_policy: event.target.value });
   }
 
+  //Check Location handeler
+  changeListener(event, number) {
+    console.log(number)
+  }
+
   render() {
     return (
       <div>
@@ -239,8 +244,8 @@ class SonarCheck extends React.Component {
                 <button onClick={this.handleCloseModal}>Close Modal</button>
                 <SonarLocations
                   checkNumber={x}
-                  theState={this.props.theState}
-                  changeListener={this.props.changeListener}
+                  check={this.props.theState.checks[x - 1]}
+                  changeListener={event => this.changeListener(event, x)}
                 />
 
                 {/* <div id="us_monitors">
