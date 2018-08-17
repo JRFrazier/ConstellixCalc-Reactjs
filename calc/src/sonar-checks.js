@@ -27,6 +27,7 @@ class SonarChecks extends React.Component {
         : this.state.checks.concat(obj)*/
     const obj = {};
     obj["check"] = {
+      checkNumber: num.length,
       checkType: "HTTP",
       checkLocations: {
         North_America: {
