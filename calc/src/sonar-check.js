@@ -12,16 +12,14 @@ class SonarLocations extends React.Component {
 
   handleChange(event) {
     this.props.changeListener(event);
-    console.log("the change id is", this.props.modalId);
+    console.log(
+      this.props.checkState["check"]["checkLocations"]["North_America"][
+        "Toronto_Canada"
+      ]
+    );
   }
 
   Locations() {
-    console.log(
-      "\n\n",
-      this.props.check,
-      "check number is",
-      this.props.checkNumber
-    );
     const obj = this.props.check["check"]["checkLocations"];
 
     const usLocations = [];
@@ -89,6 +87,17 @@ class SonarLocations extends React.Component {
                 className="North_America"
                 id={x.replace(/,/g, "").replace(/ /g, "_")}
                 type="checkbox"
+                defaultChecked={
+                  this.props.checkState["check"]["checkLocations"][
+                    "North_America"
+                  ][
+                    `${x
+                      .split(",")
+                      .join("")
+                      .split(" ")
+                      .join("_")}`
+                  ]
+                }
                 onChange={event => this.handleChange(event)}
               />
             </div>
@@ -150,13 +159,12 @@ class SonarCheck extends React.Component {
     const modalId = event.target.id;
     this.setState({ showModal: true });
     //splitting up the state to grab the check locations state
-    this.setState({modal_id: modalId})
+    this.setState({ modal_id: modalId });
   }
 
   handleCloseModal(event) {
     this.setState({ showModal: false });
-    console.log("this is the id", this.state.modal_id);
-
+    console.log(this.props.theState);
   }
 
   //Check Location Handler
@@ -195,7 +203,7 @@ class SonarCheck extends React.Component {
 
   //Check Location handeler
   changeListener(event, number) {
-    console.log(number);
+    this.props.changeListener(event, number);
   }
 
   render() {
@@ -248,10 +256,13 @@ class SonarCheck extends React.Component {
                 <p>Modal text!</p>
                 <button onClick={this.handleCloseModal}>Close Modal</button>
                 <SonarLocations
-                  checkNumber={x}
+                  checkState={
+                    this.props.theState.checks[this.state.modal_id - 1]
+                  }
                   check={this.props.theState.checks[x - 1]}
-                  changeListener={event => this.changeListener(event, x)}
-                  modalId={this.state.modal_id}
+                  changeListener={event =>
+                    this.changeListener(event, this.state.modal_id)
+                  }
                 />
 
                 {/* <div id="us_monitors">

@@ -53,7 +53,6 @@ class SonarChecks extends React.Component {
     const check = this.state.checks.concat(obj);
     this.setState({ check_number: num });
     this.setState({ checks: check });
-    console.log(this.state);
   }
 
   deleteCheck(key) {
@@ -66,16 +65,19 @@ class SonarChecks extends React.Component {
     console.log(key);
   }
 
-  handleChange(event) {
+  handleChange(event, number) {
     //Check Locations
     const x = this.state.checks;
     const obj = {};
     obj["checks"] = x;
     const checks = obj["checks"];
-    let a = Object.assign({}, checks[0]);
-    a["check"]["checkLocations"]["North_America"]["Toronto_Canada"] = true;
+    let a = Object.assign({}, checks[number - 1]);
+    a["check"]["checkLocations"][event.target.className][
+      event.target.id
+    ] = true;
     this.setState(obj);
     //above need fixen :/
+    console.log(event.target.id, number);
   }
 
   render() {
