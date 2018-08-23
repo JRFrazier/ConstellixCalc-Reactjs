@@ -12,7 +12,7 @@ class SonarLocations extends React.Component {
 
   handleChange(event) {
     this.props.changeListener(event);
-    console.log(this.props.check["check"]["checkNumber"]);
+    console.log("the change id is", this.props.modalId);
   }
 
   Locations() {
@@ -79,7 +79,7 @@ class SonarLocations extends React.Component {
     }
     return (
       <div>
-        <h1>{this.props.check["check"]["checkNumber"]}</h1>
+        <h1>{this.props.modalId}</h1>
         <h3>North America</h3>
         {usLocations.map(x => {
           return (
@@ -136,7 +136,8 @@ class SonarCheck extends React.Component {
     this.state = {
       showModal: false,
       na_eu: 0,
-      check_int: 0
+      check_int: 0,
+      modal_id: 0
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -149,11 +150,13 @@ class SonarCheck extends React.Component {
     const modalId = event.target.id;
     this.setState({ showModal: true });
     //splitting up the state to grab the check locations state
+    this.setState({modal_id: modalId})
   }
 
   handleCloseModal(event) {
     this.setState({ showModal: false });
-    console.log("this is the id", event.target.id);
+    console.log("this is the id", this.state.modal_id);
+
   }
 
   //Check Location Handler
@@ -248,6 +251,7 @@ class SonarCheck extends React.Component {
                   checkNumber={x}
                   check={this.props.theState.checks[x - 1]}
                   changeListener={event => this.changeListener(event, x)}
+                  modalId={this.state.modal_id}
                 />
 
                 {/* <div id="us_monitors">
