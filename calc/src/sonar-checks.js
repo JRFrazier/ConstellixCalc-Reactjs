@@ -66,16 +66,25 @@ class SonarChecks extends React.Component {
   }
 
   handleChange(event, number) {
-    //Check Locations
-    const x = this.state.checks;
-    const obj = {};
-    obj["checks"] = x;
-    const checks = obj["checks"];
-    let a = Object.assign({}, checks[number - 1]);
-    a["check"]["checkLocations"][event.target.className][
-      event.target.id
-    ] = true;
-    this.setState(obj);
+    if (event.target.id === "check_type") { 
+      const x = this.state.checks;
+      const obj = {};
+      obj["checks"] = x;
+      const checks = obj["checks"]
+      let y = Object.assign({}, checks[number - 1]);
+      y["check"]["checkType"] = event.target.value;
+      this.setState(obj);
+    } else { //Check Locations
+      const x = this.state.checks;
+      const obj = {};
+      obj["checks"] = x;
+      const checks = obj["checks"];
+      let a = Object.assign({}, checks[number - 1]);
+      a["check"]["checkLocations"][event.target.className][
+        event.target.id
+      ] = true;
+      this.setState(obj);
+    }
     //above need fixen :/
     console.log(event.target.id, number);
   }

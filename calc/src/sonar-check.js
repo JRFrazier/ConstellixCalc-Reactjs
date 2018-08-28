@@ -230,7 +230,7 @@ class SonarCheck extends React.Component {
               <select
                 id="check_type"
                 value={this.props.check_type}
-                onChange={this.props.changeListener}
+                onChange={event => this.props.changeListener(event, x)}
               >
                 <option value="HTTP">HTTP</option>
                 <option value="HTTPS">HTTPS</option>
