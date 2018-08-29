@@ -58,13 +58,21 @@ class SonarChecks extends React.Component {
   }
 
   deleteCheck(key) {
+    //Remove index from check_number in state
     const array = [...this.state.check_number];
-    const index = array.indexOf(key);
-    array.splice(index, 1);
+    array.pop();
+
+    /*const array = this.state.check_number*/
+
+    //Remove index from checks
+    const checks = this.state.checks
+    checks.splice(key - 1, 1)
+
     this.setState({
-      check_number: array
+      check_number: array,
+      checks: checks
     });
-    console.log(key);
+    console.log("array", array, "checks", checks);
   }
 
   handleChange(event, number) {

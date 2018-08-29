@@ -209,7 +209,7 @@ class SonarCheck extends React.Component {
               <input
                 type="number"
                 id="check_amount"
-                value={this.props.theState.checks[x - 1].check.checkAmount}
+                value={!this.props.theState.checks[x - 1] ? 0 : this.props.theState.checks[x - 1].check.checkAmount}
                 onChange={event => {
                   this.props.changeListener(event, x);
                   console.log(this.state);
