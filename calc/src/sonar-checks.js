@@ -28,7 +28,9 @@ class SonarChecks extends React.Component {
     const obj = {};
     obj["check"] = {
       checkNumber: num.length,
+      checkAmount: 1, 
       checkType: "HTTP",
+      checkPolicy: "Simultaneous",
       checkLocations: {
         North_America: {
           Toronto_Canada: false,
@@ -74,6 +76,23 @@ class SonarChecks extends React.Component {
       let y = Object.assign({}, checks[number - 1]);
       y["check"]["checkType"] = event.target.value;
       this.setState(obj);
+    } else if (event.target.id === "check_policy") {
+      const x = this.state.checks;
+      const obj = {};
+      obj["checks"] = x;
+      const checks = obj["checks"]
+      let y = Object.assign({}, checks[number - 1]);
+      y["check"]["checkPolicy"] = event.target.value;
+      this.setState(obj); 
+    } else if (event.target.id === "check_amount") {
+      const x = this.state.checks;
+      const obj = {};
+      obj["checks"] = x;
+      const checks = obj["checks"]
+      let y = Object.assign({}, checks[number - 1]);
+      y["check"]["checkAmount"] = event.target.value;
+      this.setState(obj); 
+      console.log("this is it", event.target.value)
     } else { //Check Locations
       const x = this.state.checks;
       const obj = {};
@@ -106,7 +125,6 @@ class SonarChecks extends React.Component {
             className={"sonar-calc"}
             delete={key => this.deleteCheck(key)}
             value={this.state.check_number}
-            check_type={this.state.check_type}
             changeListener={(x, y) => this.handleChange(x, y)}
           />
         </div>

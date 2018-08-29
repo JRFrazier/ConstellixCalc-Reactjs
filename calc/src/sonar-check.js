@@ -151,8 +151,6 @@ class SonarCheck extends React.Component {
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handlePolicyChange = this.handlePolicyChange.bind(this);
-    this.handleThisChange = this.handleThisChange.bind(this);
   }
 
   handleOpenModal(event) {
@@ -190,16 +188,6 @@ class SonarCheck extends React.Component {
     console.log(checkId);
   }
 
-  //Check Type Value Handler
-  handleThisChange(event) {
-    console.log(this.state);
-  }
-
-  //Check Policy Handler
-  handlePolicyChange(event) {
-    console.log(event.target.value);
-    this.setState({ check_policy: event.target.value });
-  }
 
   //Check Location handeler
   changeListener(event, number) {
@@ -217,19 +205,19 @@ class SonarCheck extends React.Component {
               className={this.props.className}
             >
               <button onClick={() => this.props.delete(x)}>Delete</button>
-              <span className="flag-icon flag-icon-gr">Flag</span>
               <label>Number Of Checks: </label>
               <input
-                type="text"
+                type="number"
+                id="check_amount"
+                value={this.props.theState.checks[x - 1].check.checkAmount}
                 onChange={event => {
-                  this.handleThisChange(event);
+                  this.props.changeListener(event, x);
                   console.log(this.state);
                 }}
               />
               <label>Check Type</label>
               <select
                 id="check_type"
-                value={this.props.check_type}
                 onChange={event => this.props.changeListener(event, x)}
               >
                 <option value="HTTP">HTTP</option>
@@ -239,7 +227,7 @@ class SonarCheck extends React.Component {
                 <option value="Watterfall">Watterfall</option>
               </select>
               <label>Check Policy</label>
-              <select onChange={this.handlePolicyChange}>
+              <select id="check_policy" onChange={event => this.props.changeListener(event, x)}>
                 <option value="Simultaneous">Simultaneous</option>
                 <option value="Once Per Site">Once Per Site</option>
               </select>
