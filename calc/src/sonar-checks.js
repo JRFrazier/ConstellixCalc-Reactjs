@@ -27,8 +27,8 @@ class SonarChecks extends React.Component {
         : this.state.checks.concat(obj)*/
     const obj = {};
     obj["check"] = {
-      checkNumber: num.length,
-      checkAmount: 1, 
+      checkKey: Math.floor(Math.random() * 100),
+      checkAmount: 1,
       checkType: "HTTP",
       checkPolicy: "Simultaneous",
       checkLocations: {
@@ -65,8 +65,8 @@ class SonarChecks extends React.Component {
     /*const array = this.state.check_number*/
 
     //Remove index from checks
-    const checks = this.state.checks
-    checks.splice(key - 1, 1)
+    const checks = this.state.checks;
+    checks.splice(key - 1, 1);
 
     this.setState({
       check_number: array,
@@ -76,11 +76,11 @@ class SonarChecks extends React.Component {
   }
 
   handleChange(event, number) {
-    if (event.target.id === "check_type") { 
+    if (event.target.id === "check_type") {
       const x = this.state.checks;
       const obj = {};
       obj["checks"] = x;
-      const checks = obj["checks"]
+      const checks = obj["checks"];
       let y = Object.assign({}, checks[number - 1]);
       y["check"]["checkType"] = event.target.value;
       this.setState(obj);
@@ -88,20 +88,24 @@ class SonarChecks extends React.Component {
       const x = this.state.checks;
       const obj = {};
       obj["checks"] = x;
-      const checks = obj["checks"]
+      const checks = obj["checks"];
       let y = Object.assign({}, checks[number - 1]);
       y["check"]["checkPolicy"] = event.target.value;
-      this.setState(obj); 
+      this.setState(obj);
     } else if (event.target.id === "check_amount") {
       const x = this.state.checks;
       const obj = {};
       obj["checks"] = x;
-      const checks = obj["checks"]
+      const checks = obj["checks"];
       let y = Object.assign({}, checks[number - 1]);
-      y["check"]["checkAmount"] = event.target.value;
-      this.setState(obj); 
-      console.log("this is it", event.target.value)
-    } else { //Check Locations
+      let val = !parseInt(event.target.value)
+        ? ""
+        : parseInt(event.target.value);
+      y["check"]["checkAmount"] = val;
+      this.setState(obj);
+      console.log("this is it", event.target.value);
+    } else {
+      //Check Locations
       const x = this.state.checks;
       const obj = {};
       obj["checks"] = x;

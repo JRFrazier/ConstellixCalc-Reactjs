@@ -188,7 +188,6 @@ class SonarCheck extends React.Component {
     console.log(checkId);
   }
 
-
   //Check Location handeler
   changeListener(event, number) {
     this.props.changeListener(event, number);
@@ -200,7 +199,7 @@ class SonarCheck extends React.Component {
         {this.props.value.map(x => {
           return (
             <form
-              key={x}
+              key={this.props.theState.checks[x - 1].check.checkKey}
               onSubmit={event => event.preventDefault()}
               className={this.props.className}
             >
@@ -209,7 +208,11 @@ class SonarCheck extends React.Component {
               <input
                 type="number"
                 id="check_amount"
-                value={!this.props.theState.checks[x - 1] ? 0 : this.props.theState.checks[x - 1].check.checkAmount}
+                value={
+                  !this.props.theState.checks[x - 1]
+                    ? 0
+                    : this.props.theState.checks[x - 1].check.checkAmount
+                }
                 onChange={event => {
                   this.props.changeListener(event, x);
                   console.log(this.state);
@@ -226,8 +229,24 @@ class SonarCheck extends React.Component {
                 <option value="DNS">DNS</option>
                 <option value="Watterfall">Watterfall</option>
               </select>
+              <label>Check Interval</label>
+              <select
+                id="check_type"
+                onChange={event => this.props.changeListener(event, x)}
+              >
+                <option value="30sec">30 Seconds</option>
+                <option value="60sec">60 Seconds</option>
+                <option value="5min">5 Minutes</option>
+                <option value="10min">10 Minutes</option>
+                <option value="30min">30 Minutes</option>
+                <option value="12hrs">12 Hours</option>
+                <option value="24hrs">24 Hours</option>
+              </select>
               <label>Check Policy</label>
-              <select id="check_policy" onChange={event => this.props.changeListener(event, x)}>
+              <select
+                id="check_policy"
+                onChange={event => this.props.changeListener(event, x)}
+              >
                 <option value="Simultaneous">Simultaneous</option>
                 <option value="Once Per Site">Once Per Site</option>
               </select>
