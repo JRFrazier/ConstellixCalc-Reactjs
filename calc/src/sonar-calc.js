@@ -7,7 +7,10 @@ class SonarCalc extends React.Component {
   render() {
     return  (
       <div className={this.props.className}>
-        <SonarChecks allLocations={(i) => this.saveLocation(i)}/>
+        <SonarChecks 
+        allLocations={(i) => this.saveLocation(i)}
+        getTotal = {total => this.props.getTotal(total)}
+        />
       </div>
   )
   }

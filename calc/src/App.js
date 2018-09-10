@@ -22,7 +22,8 @@ class App extends Component {
         geoprox: 0,
         ipfilter: 0,
         aname: 0,
-        addusers: 0
+        addusers: 0,
+        sonar: 0
       },
       total: 0
     };
@@ -108,6 +109,21 @@ class App extends Component {
         ...this.state,
         dns: { ...this.state.dns, addusers: i[1] }
       });
+    } else if (Object.keys(i[0])[0] === "check") {
+      let cost = 0;
+      i.map(x => {
+        console.log("foobar",x.check.checkLocations)
+        const naObj = x.check.checkLocations.North_America;
+        const euObj = x.check.checkLocations.Europe;
+        const apObj = x.check.checkLocations.Asia_Pacific;
+        const ocObj = x.check.checkLocations.Oceania;
+       for (const key in naObj) {
+         naObj[key] ? cost += 1 : cost += 0;
+       }
+       for (const key in euObj)
+       euObj[key] ? cost += 1 : cost += 0;
+      })
+      console.log("this is the cost", cost)
     }
   }
 
@@ -167,7 +183,10 @@ class App extends Component {
                 className={dnsPage}
                 getTotal={total => this.renderTotal(total)}
               />
-              <SonarCalc className={sonarPage} />
+              <SonarCalc 
+              className={sonarPage} 
+              getTotal={total => this.renderTotal(total)}
+              />
               <Monthly className={monthlyPage} obj={this.state.dns} />
             </div>
             <p className="App-intro" />

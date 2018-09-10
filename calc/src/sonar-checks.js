@@ -31,6 +31,7 @@ class SonarChecks extends React.Component {
       checkAmount: 1,
       checkType: "HTTP",
       checkPolicy: "Simultaneous",
+      checkInterval: 30, 
       checkLocations: {
         North_America: {
           Toronto_Canada: false,
@@ -47,7 +48,10 @@ class SonarChecks extends React.Component {
           Los_Angeles_CA: false,
           San_Jose_CA: false
         },
-        Europe: { London_Great_Britain: false },
+        Europe: { 
+          London_UK: false,
+          Frankfurt_DE: false,
+        },
         Asia_Pacific: { Hong_Kong: false },
         Oceania: { Sydney_Australia: false }
       }
@@ -55,6 +59,10 @@ class SonarChecks extends React.Component {
     const check = this.state.checks.concat(obj);
     this.setState({ check_number: num });
     this.setState({ checks: check });
+  }
+
+  calcTotal() {
+    this.props.getTotal(this.state.checks)
   }
 
   deleteCheck(key) {
@@ -104,19 +112,41 @@ class SonarChecks extends React.Component {
       y["check"]["checkAmount"] = val;
       this.setState(obj);
       console.log("this is it", event.target.value);
-    } else {
-      //Check Locations
+    } else if (event.target.id === "check_int") {
       const x = this.state.checks;
       const obj = {};
       obj["checks"] = x;
       const checks = obj["checks"];
-      let a = Object.assign({}, checks[number - 1]);
-      a["check"]["checkLocations"][event.target.className][
-        event.target.id
-      ] = true;
-      this.setState(obj);
+      let y = Object.assign({}, checks[number - 1]);
+      let val = parseInt(event.target.value)
+      y["check"]["checkInterval"] = val;
+      this.setState(obj)
+    } else {
+      //Check Locations
+      const check = this.state.checks[number - 1].check.checkLocations[event.target.className][event.target.id]
+      if (check === true) {
+        const x = this.state.checks;
+        const obj = {};
+        obj["checks"] = x;
+        const checks = obj["checks"];
+        let a = Object.assign({}, checks[number - 1]);
+        a["check"]["checkLocations"][event.target.className][
+          event.target.id
+        ] = false;
+        this.setState(obj); 
+      } else {
+        const x = this.state.checks;
+        const obj = {};
+        obj["checks"] = x;
+        const checks = obj["checks"];
+        let a = Object.assign({}, checks[number - 1]);
+        a["check"]["checkLocations"][event.target.className][
+          event.target.id
+        ] = true;
+        this.setState(obj);
+      }
     }
-    //above need fixen :/
+    this.props.getTotal(this.state.checks)
     console.log(event.target.id, number);
   }
 

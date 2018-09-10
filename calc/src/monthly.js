@@ -28,6 +28,9 @@ class Monthly extends React.Component {
           <h3>
             Add Users: {this.props.obj.addusers ? this.props.obj.addusers : 0}
           </h3>
+          <h3>
+            Sonar: {this.props.obj.sonar ? this.props.obj.sonar : 0}
+          </h3>
         </div>
       </div>
     );
