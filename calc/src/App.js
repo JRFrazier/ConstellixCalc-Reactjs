@@ -103,27 +103,36 @@ class App extends Component {
         ...this.state,
         dns: { ...this.state.dns, aname: i[1] }
       });
-      console.log(i);
     } else if (i[0] === "addusers") {
       this.setState({
         ...this.state,
         dns: { ...this.state.dns, addusers: i[1] }
       });
     } else if (Object.keys(i[0])[0] === "check") {
-      let cost = 0;
+      let cost = [];
+      let index = 0;
+      let checkTotal = [];
       i.map(x => {
-        console.log("foobar",x.check.checkLocations)
+        cost[index] = 0;
+        console.log("foobar", x.check.checkLocations);
         const naObj = x.check.checkLocations.North_America;
         const euObj = x.check.checkLocations.Europe;
         const apObj = x.check.checkLocations.Asia_Pacific;
         const ocObj = x.check.checkLocations.Oceania;
-       for (const key in naObj) {
-         naObj[key] ? cost += 1 : cost += 0;
-       }
-       for (const key in euObj)
-       euObj[key] ? cost += 1 : cost += 0;
-      })
-      console.log("this is the cost", cost)
+        for (const key in naObj)
+          naObj[key] ? (cost[index] += 1) : (cost[index] += 0);
+        for (const key in euObj)
+          euObj[key] ? (cost[index] += 1) : (cost[index] += 0);
+        index += 1;
+      });
+      console.log(
+        "this is the cost",
+        cost,
+        "this is i",
+        i,
+        "this is index",
+        index
+      );
     }
   }
 
@@ -183,9 +192,9 @@ class App extends Component {
                 className={dnsPage}
                 getTotal={total => this.renderTotal(total)}
               />
-              <SonarCalc 
-              className={sonarPage} 
-              getTotal={total => this.renderTotal(total)}
+              <SonarCalc
+                className={sonarPage}
+                getTotal={total => this.renderTotal(total)}
               />
               <Monthly className={monthlyPage} obj={this.state.dns} />
             </div>
