@@ -123,6 +123,11 @@ class App extends Component {
           naObj[key] ? (cost[index] += 1) : (cost[index] += 0);
         for (const key in euObj)
           euObj[key] ? (cost[index] += 1) : (cost[index] += 0);
+        for (const key in apObj)
+          apObj[key] ? (cost[index] += 1) : (cost[index] += 0);
+        for (const key in ocObj)
+          ocObj[key] ? (cost[index] += 1) : (cost[index] += 0);       
+        checkTotal[index] = cost[index] * x.check.checkAmount
         index += 1;
       });
       console.log(
@@ -131,7 +136,9 @@ class App extends Component {
         "this is i",
         i,
         "this is index",
-        index
+        index,
+        "this is checkTotal",
+        checkTotal
       );
     }
   }

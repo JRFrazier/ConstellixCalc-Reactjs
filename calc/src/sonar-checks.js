@@ -52,8 +52,8 @@ class SonarChecks extends React.Component {
           London_UK: false,
           Frankfurt_DE: false,
         },
-        Asia_Pacific: { Hong_Kong: false },
-        Oceania: { Sydney_Australia: false }
+        Asia_Pacific: { Hong_Kong: false, Tokyo_JP: false, Singapore_SG: false, Banglore_IN: false, Chennai_IN: false },
+        Oceania: { Sydney_AU: false, Adelaide_AU: false, Aukland_NZ: false }
       }
     };
     const check = this.state.checks.concat(obj);
