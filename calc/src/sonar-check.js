@@ -103,14 +103,12 @@ class SonarLocations extends React.Component {
           return (
             <div key={x}>
               <label>{x}</label>
-              <input 
-                className="Europe" 
-                id={x.replace(/,/g, "").replace(/ /g, "_")} 
-                type="checkbox" 
+              <input
+                className="Europe"
+                id={x.replace(/,/g, "").replace(/ /g, "_")}
+                type="checkbox"
                 defaultChecked={
-                  this.props.checkState["check"]["checkLocations"][
-                    "Europe"
-                  ][
+                  this.props.checkState["check"]["checkLocations"]["Europe"][
                     `${x
                       .split(",")
                       .join("")
@@ -128,10 +126,10 @@ class SonarLocations extends React.Component {
           return (
             <div key={x}>
               <label>{x}</label>
-              <input 
-                className="Asia_Pacific" 
-                id={x.replace(/,/g, "").replace(/ /g, "_")} 
-                type="checkbox" 
+              <input
+                className="Asia_Pacific"
+                id={x.replace(/,/g, "").replace(/ /g, "_")}
+                type="checkbox"
                 defaultChecked={
                   this.props.checkState["check"]["checkLocations"][
                     "Asia_Pacific"
@@ -144,7 +142,7 @@ class SonarLocations extends React.Component {
                   ]
                 }
                 onChange={event => this.handleChange(event)}
-                />
+              />
             </div>
           );
         })}
@@ -153,14 +151,12 @@ class SonarLocations extends React.Component {
           return (
             <div key={x}>
               <label>{x}</label>
-              <input 
-                className="Oceania" 
+              <input
+                className="Oceania"
                 id={x.replace(/,/g, "").replace(/ /g, "_")}
-                type="checkbox" 
+                type="checkbox"
                 defaultChecked={
-                  this.props.checkState["check"]["checkLocations"][
-                    "Oceania"
-                  ][
+                  this.props.checkState["check"]["checkLocations"]["Oceania"][
                     `${x
                       .split(",")
                       .join("")
@@ -168,8 +164,8 @@ class SonarLocations extends React.Component {
                       .join("_")}`
                   ]
                 }
-                onChange={event => this.handleChange(event)} 
-                />
+                onChange={event => this.handleChange(event)}
+              />
             </div>
           );
         })}
@@ -278,13 +274,13 @@ class SonarCheck extends React.Component {
                 id="check_int"
                 onChange={event => this.props.changeListener(event, x)}
               >
-                <option value="30">30 Seconds</option>
-                <option value="60">60 Seconds</option>
-                <option value="600">5 Minutes</option>
-                <option value="1200">10 Minutes</option>
-                <option value="1800">30 Minutes</option>
-                <option value="43200">12 Hours</option>
-                <option value="86400">24 Hours</option>
+                <option value="2880">30 Seconds</option>
+                <option value="1440">60 Seconds</option>
+                <option value="144">5 Minutes</option>
+                <option value="72">10 Minutes</option>
+                <option value="48">30 Minutes</option>
+                <option value="2">12 Hours</option>
+                <option value="1">24 Hours</option>
               </select>
               <label>Check Policy</label>
               <select

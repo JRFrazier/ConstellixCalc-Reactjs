@@ -31,7 +31,7 @@ class SonarChecks extends React.Component {
       checkAmount: 1,
       checkType: "HTTP",
       checkPolicy: "Simultaneous",
-      checkInterval: 30, 
+      checkInterval: 2880,
       checkLocations: {
         North_America: {
           Toronto_Canada: false,
@@ -48,11 +48,17 @@ class SonarChecks extends React.Component {
           Los_Angeles_CA: false,
           San_Jose_CA: false
         },
-        Europe: { 
+        Europe: {
           London_UK: false,
-          Frankfurt_DE: false,
+          Frankfurt_DE: false
         },
-        Asia_Pacific: { Hong_Kong: false, Tokyo_JP: false, Singapore_SG: false, Banglore_IN: false, Chennai_IN: false },
+        Asia_Pacific: {
+          Hong_Kong: false,
+          Tokyo_JP: false,
+          Singapore_SG: false,
+          Banglore_IN: false,
+          Chennai_IN: false
+        },
         Oceania: { Sydney_AU: false, Adelaide_AU: false, Aukland_NZ: false }
       }
     };
@@ -62,7 +68,7 @@ class SonarChecks extends React.Component {
   }
 
   calcTotal() {
-    this.props.getTotal(this.state.checks)
+    this.props.getTotal(this.state.checks);
   }
 
   deleteCheck(key) {
@@ -118,12 +124,14 @@ class SonarChecks extends React.Component {
       obj["checks"] = x;
       const checks = obj["checks"];
       let y = Object.assign({}, checks[number - 1]);
-      let val = parseInt(event.target.value)
+      let val = parseInt(event.target.value);
       y["check"]["checkInterval"] = val;
-      this.setState(obj)
+      this.setState(obj);
     } else {
       //Check Locations
-      const check = this.state.checks[number - 1].check.checkLocations[event.target.className][event.target.id]
+      const check = this.state.checks[number - 1].check.checkLocations[
+        event.target.className
+      ][event.target.id];
       if (check === true) {
         const x = this.state.checks;
         const obj = {};
@@ -133,7 +141,7 @@ class SonarChecks extends React.Component {
         a["check"]["checkLocations"][event.target.className][
           event.target.id
         ] = false;
-        this.setState(obj); 
+        this.setState(obj);
       } else {
         const x = this.state.checks;
         const obj = {};
@@ -146,7 +154,7 @@ class SonarChecks extends React.Component {
         this.setState(obj);
       }
     }
-    this.props.getTotal(this.state.checks)
+    this.props.getTotal(this.state.checks);
     console.log(event.target.id, number);
   }
 

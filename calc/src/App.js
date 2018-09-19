@@ -110,6 +110,7 @@ class App extends Component {
       });
     } else if (Object.keys(i[0])[0] === "check") {
       let cost = [];
+      let totalChecked = [];
       let index = 0;
       let checkTotal = [];
       const httpCost = 0.00004;
@@ -118,12 +119,15 @@ class App extends Component {
       const dnsCost = 0.00002;
       i.map(x => {
         cost[index] = 0;
+        totalChecked[index] = 0;
+
+        //Check Location Objects
         const naObj = x.check.checkLocations.North_America;
         const euObj = x.check.checkLocations.Europe;
         const apObj = x.check.checkLocations.Asia_Pacific;
         const ocObj = x.check.checkLocations.Oceania;
         const protocol = x.check.checkType;
-        for (const key in naObj)
+        for (const key in naObj) {
           if (protocol === "HTTP") {
             naObj[key] ? (cost[index] += 0.00004) : (cost[index] += 0);
           } else if (protocol === "HTTPS") {
@@ -133,7 +137,9 @@ class App extends Component {
           } else if (protocol === "DNS") {
             naObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
           }
-        for (const key in euObj)
+          naObj[key] ? (totalChecked[index] += 1) : (totalChecked[index] += 0);
+        }
+        for (const key in euObj) {
           if (protocol === "HTTP") {
             euObj[key] ? (cost[index] += 0.00004) : (cost[index] += 0);
           } else if (protocol === "HTTPS") {
@@ -143,7 +149,9 @@ class App extends Component {
           } else if (protocol === "DNS") {
             euObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
           }
-        for (const key in apObj)
+          euObj[key] ? (totalChecked[index] += 1) : (totalChecked[index] += 0);
+        }
+        for (const key in apObj) {
           if (protocol === "HTTP") {
             apObj[key] ? (cost[index] += 0.00006) : (cost[index] += 0);
           } else if (protocol === "HTTPS") {
@@ -153,7 +161,9 @@ class App extends Component {
           } else if (protocol === "DNS") {
             apObj[key] ? (cost[index] += 0.00003) : (cost[index] += 0);
           }
-        for (const key in ocObj)
+          apObj[key] ? (totalChecked[index] += 1) : (totalChecked[index] += 0);
+        }
+        for (const key in ocObj) {
           if (protocol === "HTTP") {
             ocObj[key] ? (cost[index] += 0.00008) : (cost[index] += 0);
           } else if (protocol === "HTTPS") {
@@ -163,6 +173,8 @@ class App extends Component {
           } else if (protocol === "DNS") {
             ocObj[key] ? (cost[index] += 0.00003) : (cost[index] += 0);
           }
+          ocObj[key] ? (totalChecked[index] += 1) : (totalChecked[index] += 0);
+        }
         checkTotal[index] = cost[index] * x.check.checkAmount;
         index += 1;
       });
@@ -174,7 +186,9 @@ class App extends Component {
         "this is index",
         index,
         "this is checkTotal",
-        checkTotal
+        checkTotal,
+        "this is total checked",
+        totalChecked
       );
     }
   }
