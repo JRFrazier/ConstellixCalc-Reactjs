@@ -118,7 +118,8 @@ class App extends Component {
       const dnsCost = 0.00002;
       i.map(x => {
         cost[index] = 0;
-        let totalChecked = 0;
+        let totalChecked = 1;
+        const checkPolicy = x.check.checkPolicy;
 
         //Check Location Objects
         const naObj = x.check.checkLocations.North_America;
@@ -126,21 +127,42 @@ class App extends Component {
         const apObj = x.check.checkLocations.Asia_Pacific;
         const ocObj = x.check.checkLocations.Oceania;
         const protocol = x.check.checkType;
-        const checkPolicy = x.check.checkPolicy;
         for (const key in naObj) {
-          if (checkPolicy === "Once Per Site"){
-          if (protocol === "HTTP") {
-            naObj[key] ? (cost[index] += 0.00004) : (cost[index] += 0);
-          } else if (protocol === "HTTPS") {
-            naObj[key] ? (cost[index] += 0.00006) : (cost[index] += 0);
-          } else if (protocol === "TCP") {
-            naObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
-          } else if (protocol === "DNS") {
-            naObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
+          if (checkPolicy === "Once Per Site") {
+            if (protocol === "HTTP") {
+              naObj[key]
+                ? (cost[index] +=
+                    0.00004 * (x.check.checkInterval / totalChecked))
+                : (cost[index] += 0);
+            } else if (protocol === "HTTPS") {
+              naObj[key]
+                ? (cost[index] +=
+                    0.00006 * (x.check.checkInterval / totalChecked))
+                : (cost[index] += 0);
+            } else if (protocol === "TCP") {
+              naObj[key]
+                ? (cost[index] +=
+                    0.00002 * (x.check.checkInterval / totalChecked))
+                : (cost[index] += 0);
+            } else if (protocol === "DNS") {
+              naObj[key]
+                ? (cost[index] +=
+                    0.00002 * (x.check.checkInterval / totalChecked))
+                : (cost[index] += 0);
+            }
+          } else {
+            if (protocol === "HTTP") {
+              naObj[key] ? (cost[index] += 0.00004) : (cost[index] += 0);
+            } else if (protocol === "HTTPS") {
+              naObj[key] ? (cost[index] += 0.00006) : (cost[index] += 0);
+            } else if (protocol === "TCP") {
+              naObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
+            } else if (protocol === "DNS") {
+              naObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
+            }
           }
-        }
           naObj[key] ? (totalChecked += 1) : (totalChecked += 0);
-          console.log("total checked", totalChecked)
+          console.log("total checked", totalChecked);
         }
         for (const key in euObj) {
           if (protocol === "HTTP") {
