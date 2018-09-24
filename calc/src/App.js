@@ -118,7 +118,7 @@ class App extends Component {
       const dnsCost = 0.00002;
       i.map(x => {
         cost[index] = 0;
-        let totalChecked = 1;
+        let totalChecked = 0;
         const checkPolicy = x.check.checkPolicy;
 
         //Check Location Objects
@@ -127,30 +127,105 @@ class App extends Component {
         const apObj = x.check.checkLocations.Asia_Pacific;
         const ocObj = x.check.checkLocations.Oceania;
         const protocol = x.check.checkType;
-        for (const key in naObj) {
-          if (checkPolicy === "Once Per Site") {
-            if (protocol === "HTTP") {
-              naObj[key]
-                ? (cost[index] +=
-                    0.00004 * (x.check.checkInterval / totalChecked))
-                : (cost[index] += 0);
-            } else if (protocol === "HTTPS") {
-              naObj[key]
-                ? (cost[index] +=
-                    0.00006 * (x.check.checkInterval / totalChecked))
-                : (cost[index] += 0);
-            } else if (protocol === "TCP") {
-              naObj[key]
-                ? (cost[index] +=
-                    0.00002 * (x.check.checkInterval / totalChecked))
-                : (cost[index] += 0);
-            } else if (protocol === "DNS") {
-              naObj[key]
-                ? (cost[index] +=
-                    0.00002 * (x.check.checkInterval / totalChecked))
-                : (cost[index] += 0);
+
+        // Runs if "Once Per Site" Check Policy is selected
+        if (x.check.checkPolicy === "Once Per Site") {
+          for (const key in naObj) {
+            naObj[key] ? (totalChecked += 1) : (totalChecked += 0);
+          }
+          for (const key in euObj) {
+            euObj[key] ? (totalChecked += 1) : (totalChecked += 0);
+          }
+          for (const key in apObj) {
+            apObj[key] ? (totalChecked += 1) : (totalChecked += 0);
+          }
+          for (const key in ocObj) {
+            ocObj[key] ? (totalChecked += 1) : (totalChecked += 0);
+          }
+
+          if (totalChecked > 0) {
+            const multiplier = x.check.checkInterval / totalChecked;
+            for (const key in naObj) {
+              if (protocol === "HTTP") {
+                naObj[key]
+                  ? (cost[index] += 0.00004 * multiplier)
+                  : (cost[index] += 0);
+              } else if (protocol === "HTTPS") {
+                naObj[key]
+                  ? (cost[index] += 0.00006 * multiplier)
+                  : (cost[index] += 0);
+              } else if (protocol === "TCP") {
+                naObj[key]
+                  ? (cost[index] += 0.00002 * multiplier)
+                  : (cost[index] += 0);
+              } else if (protocol === "DNS") {
+                naObj[key]
+                  ? (cost[index] += 0.00002 * multiplier)
+                  : (cost[index] += 0);
+              }
             }
-          } else {
+            for (const key in euObj) {
+              if (protocol === "HTTP") {
+                euObj[key]
+                  ? (cost[index] += 0.00004 * multiplier)
+                  : (cost[index] += 0);
+              } else if (protocol === "HTTPS") {
+                euObj[key]
+                  ? (cost[index] += 0.00006 * multiplier)
+                  : (cost[index] += 0);
+              } else if (protocol === "TCP") {
+                euObj[key]
+                  ? (cost[index] += 0.00002 * multiplier)
+                  : (cost[index] += 0);
+              } else if (protocol === "DNS") {
+                euObj[key]
+                  ? (cost[index] += 0.00002 * multiplier)
+                  : (cost[index] += 0);
+              }
+            }
+            for (const key in apObj) {
+              if (protocol === "HTTP") {
+                apObj[key]
+                  ? (cost[index] += 0.00006 * multiplier)
+                  : (cost[index] += 0);
+              } else if (protocol === "HTTPS") {
+                apObj[key]
+                  ? (cost[index] += 0.00008 * multiplier)
+                  : (cost[index] += 0);
+              } else if (protocol === "TCP") {
+                apObj[key]
+                  ? (cost[index] += 0.00003 * multiplier)
+                  : (cost[index] += 0);
+              } else if (protocol === "DNS") {
+                apObj[key]
+                  ? (cost[index] += 0.00003 * multiplier)
+                  : (cost[index] += 0);
+              }
+            }
+            for (const key in ocObj) {
+              if (protocol === "HTTP") {
+                ocObj[key]
+                  ? (cost[index] += 0.00008 * multiplier)
+                  : (cost[index] += 0);
+              } else if (protocol === "HTTPS") {
+                ocObj[key]
+                  ? (cost[index] += 0.0001 * multiplier)
+                  : (cost[index] += 0);
+              } else if (protocol === "TCP") {
+                ocObj[key]
+                  ? (cost[index] += 0.00003 * multiplier)
+                  : (cost[index] += 0);
+              } else if (protocol === "DNS") {
+                ocObj[key]
+                  ? (cost[index] += 0.00003 * multiplier)
+                  : (cost[index] += 0);
+              }
+            }
+          }
+          console.log(totalChecked);
+        } else {
+          //Runs if "Simultaneous" Check Policy is selected
+          for (const key in naObj) {
             if (protocol === "HTTP") {
               naObj[key] ? (cost[index] += 0.00004) : (cost[index] += 0);
             } else if (protocol === "HTTPS") {
@@ -160,49 +235,50 @@ class App extends Component {
             } else if (protocol === "DNS") {
               naObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
             }
+            naObj[key] ? (totalChecked += 1) : (totalChecked += 0);
           }
-          naObj[key] ? (totalChecked += 1) : (totalChecked += 0);
-          console.log("total checked", totalChecked);
-        }
-        for (const key in euObj) {
-          if (protocol === "HTTP") {
-            euObj[key] ? (cost[index] += 0.00004) : (cost[index] += 0);
-          } else if (protocol === "HTTPS") {
-            euObj[key] ? (cost[index] += 0.00006) : (cost[index] += 0);
-          } else if (protocol === "TCP") {
-            euObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
-          } else if (protocol === "DNS") {
-            euObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
+          for (const key in euObj) {
+            if (protocol === "HTTP") {
+              euObj[key] ? (cost[index] += 0.00004) : (cost[index] += 0);
+            } else if (protocol === "HTTPS") {
+              euObj[key] ? (cost[index] += 0.00006) : (cost[index] += 0);
+            } else if (protocol === "TCP") {
+              euObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
+            } else if (protocol === "DNS") {
+              euObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
+            }
+            euObj[key] ? (totalChecked += 1) : (totalChecked += 0);
           }
-          euObj[key] ? (totalChecked += 1) : (totalChecked += 0);
-        }
-        for (const key in apObj) {
-          if (protocol === "HTTP") {
-            apObj[key] ? (cost[index] += 0.00006) : (cost[index] += 0);
-          } else if (protocol === "HTTPS") {
-            apObj[key] ? (cost[index] += 0.00008) : (cost[index] += 0);
-          } else if (protocol === "TCP") {
-            apObj[key] ? (cost[index] += 0.00003) : (cost[index] += 0);
-          } else if (protocol === "DNS") {
-            apObj[key] ? (cost[index] += 0.00003) : (cost[index] += 0);
+          for (const key in apObj) {
+            if (protocol === "HTTP") {
+              apObj[key] ? (cost[index] += 0.00006) : (cost[index] += 0);
+            } else if (protocol === "HTTPS") {
+              apObj[key] ? (cost[index] += 0.00008) : (cost[index] += 0);
+            } else if (protocol === "TCP") {
+              apObj[key] ? (cost[index] += 0.00003) : (cost[index] += 0);
+            } else if (protocol === "DNS") {
+              apObj[key] ? (cost[index] += 0.00003) : (cost[index] += 0);
+            }
+            apObj[key] ? (totalChecked += 1) : (totalChecked += 0);
           }
-          apObj[key] ? (totalChecked += 1) : (totalChecked += 0);
-        }
-        for (const key in ocObj) {
-          if (protocol === "HTTP") {
-            ocObj[key] ? (cost[index] += 0.00008) : (cost[index] += 0);
-          } else if (protocol === "HTTPS") {
-            ocObj[key] ? (cost[index] += 0.0001) : (cost[index] += 0);
-          } else if (protocol === "TCP") {
-            ocObj[key] ? (cost[index] += 0.00003) : (cost[index] += 0);
-          } else if (protocol === "DNS") {
-            ocObj[key] ? (cost[index] += 0.00003) : (cost[index] += 0);
+          for (const key in ocObj) {
+            if (protocol === "HTTP") {
+              ocObj[key] ? (cost[index] += 0.00008) : (cost[index] += 0);
+            } else if (protocol === "HTTPS") {
+              ocObj[key] ? (cost[index] += 0.0001) : (cost[index] += 0);
+            } else if (protocol === "TCP") {
+              ocObj[key] ? (cost[index] += 0.00003) : (cost[index] += 0);
+            } else if (protocol === "DNS") {
+              ocObj[key] ? (cost[index] += 0.00003) : (cost[index] += 0);
+            }
+            ocObj[key] ? (totalChecked += 1) : (totalChecked += 0);
           }
-          ocObj[key] ? (totalChecked += 1) : (totalChecked += 0);
-        }
+        } // else if ends
+
         checkTotal[index] = cost[index] * x.check.checkAmount;
         index += 1;
       });
+
       console.log(
         "this is the cost",
         cost,
@@ -215,7 +291,6 @@ class App extends Component {
       );
     }
   }
-
   render() {
     let dnsPage = "invisible";
     let sonarPage = "invisible";
