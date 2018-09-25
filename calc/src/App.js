@@ -144,7 +144,6 @@ class App extends Component {
           }
 
           if (totalChecked > 0) {
-            console.log("total checked", totalChecked);
             const multiplier = x.check.checkInterval / totalChecked;
             for (const key in naObj) {
               if (protocol === "HTTP") {
