@@ -31,7 +31,7 @@ class SonarChecks extends React.Component {
       checkAmount: 1,
       checkType: "HTTP",
       checkPolicy: "Simultaneous",
-      checkInterval: 2880,
+      checkInterval: 86400,
       checkLocations: {
         North_America: {
           Toronto_Canada: false,

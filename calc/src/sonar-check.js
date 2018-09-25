@@ -274,13 +274,14 @@ class SonarCheck extends React.Component {
                 id="check_int"
                 onChange={event => this.props.changeListener(event, x)}
               >
-                <option value="2880">30 Seconds</option>
-                <option value="1440">60 Seconds</option>
-                <option value="144">5 Minutes</option>
-                <option value="72">10 Minutes</option>
-                <option value="48">30 Minutes</option>
-                <option value="2">12 Hours</option>
-                <option value="1">24 Hours</option>
+                {/* Value is based on number of checks per month */}
+                <option value="86400">30 Seconds</option>
+                <option value="43200">60 Seconds</option>
+                <option value="8640">5 Minutes</option>
+                <option value="43200">10 Minutes</option>
+                <option value="1400">30 Minutes</option>
+                <option value="60">12 Hours</option>
+                <option value="30">24 Hours</option>
               </select>
               <label>Check Policy</label>
               <select

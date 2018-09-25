@@ -144,6 +144,7 @@ class App extends Component {
           }
 
           if (totalChecked > 0) {
+            console.log("total checked", totalChecked);
             const multiplier = x.check.checkInterval / totalChecked;
             for (const key in naObj) {
               if (protocol === "HTTP") {
@@ -225,51 +226,84 @@ class App extends Component {
           console.log(totalChecked);
         } else {
           //Runs if "Simultaneous" Check Policy is selected
+          const checkInt = x.check.checkInterval;
           for (const key in naObj) {
             if (protocol === "HTTP") {
-              naObj[key] ? (cost[index] += 0.00004) : (cost[index] += 0);
+              naObj[key]
+                ? (cost[index] += 0.00004 * checkInt)
+                : (cost[index] += 0);
             } else if (protocol === "HTTPS") {
-              naObj[key] ? (cost[index] += 0.00006) : (cost[index] += 0);
+              naObj[key]
+                ? (cost[index] += 0.00006 * checkInt)
+                : (cost[index] += 0);
             } else if (protocol === "TCP") {
-              naObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
+              naObj[key]
+                ? (cost[index] += 0.00002 * checkInt)
+                : (cost[index] += 0);
             } else if (protocol === "DNS") {
-              naObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
+              naObj[key]
+                ? (cost[index] += 0.00002 * checkInt)
+                : (cost[index] += 0);
             }
             naObj[key] ? (totalChecked += 1) : (totalChecked += 0);
           }
           for (const key in euObj) {
             if (protocol === "HTTP") {
-              euObj[key] ? (cost[index] += 0.00004) : (cost[index] += 0);
+              euObj[key]
+                ? (cost[index] += 0.00004 * checkInt)
+                : (cost[index] += 0);
             } else if (protocol === "HTTPS") {
-              euObj[key] ? (cost[index] += 0.00006) : (cost[index] += 0);
+              euObj[key]
+                ? (cost[index] += 0.00006 * checkInt)
+                : (cost[index] += 0);
             } else if (protocol === "TCP") {
-              euObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
+              euObj[key]
+                ? (cost[index] += 0.00002 * checkInt)
+                : (cost[index] += 0);
             } else if (protocol === "DNS") {
-              euObj[key] ? (cost[index] += 0.00002) : (cost[index] += 0);
+              euObj[key]
+                ? (cost[index] += 0.00002 * checkInt)
+                : (cost[index] += 0);
             }
             euObj[key] ? (totalChecked += 1) : (totalChecked += 0);
           }
           for (const key in apObj) {
             if (protocol === "HTTP") {
-              apObj[key] ? (cost[index] += 0.00006) : (cost[index] += 0);
+              apObj[key]
+                ? (cost[index] += 0.00006 * checkInt)
+                : (cost[index] += 0);
             } else if (protocol === "HTTPS") {
-              apObj[key] ? (cost[index] += 0.00008) : (cost[index] += 0);
+              apObj[key]
+                ? (cost[index] += 0.00008 * checkInt)
+                : (cost[index] += 0);
             } else if (protocol === "TCP") {
-              apObj[key] ? (cost[index] += 0.00003) : (cost[index] += 0);
+              apObj[key]
+                ? (cost[index] += 0.00003 * checkInt)
+                : (cost[index] += 0);
             } else if (protocol === "DNS") {
-              apObj[key] ? (cost[index] += 0.00003) : (cost[index] += 0);
+              apObj[key]
+                ? (cost[index] += 0.00003 * checkInt)
+                : (cost[index] += 0);
             }
             apObj[key] ? (totalChecked += 1) : (totalChecked += 0);
           }
           for (const key in ocObj) {
             if (protocol === "HTTP") {
-              ocObj[key] ? (cost[index] += 0.00008) : (cost[index] += 0);
+              ocObj[key]
+                ? (cost[index] += 0.00008 * checkInt)
+                : (cost[index] += 0);
             } else if (protocol === "HTTPS") {
-              ocObj[key] ? (cost[index] += 0.0001) : (cost[index] += 0);
+              ocObj[key]
+                ? (cost[index] += 0.0001 * checkInt)
+                : (cost[index] += 0);
             } else if (protocol === "TCP") {
-              ocObj[key] ? (cost[index] += 0.00003) : (cost[index] += 0);
+              ocObj[key]
+                ? (cost[index] += 0.00003 * checkInt)
+                : (cost[index] += 0);
             } else if (protocol === "DNS") {
-              ocObj[key] ? (cost[index] += 0.00003) : (cost[index] += 0);
+              ocObj[key]
+                ? (cost[index] += 0.00003 * checkInt)
+                : (cost[index] += 0);
             }
             ocObj[key] ? (totalChecked += 1) : (totalChecked += 0);
           }
