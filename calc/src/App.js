@@ -112,10 +112,7 @@ class App extends Component {
       let cost = [];
       let index = 0;
       let checkTotal = [];
-      const httpCost = 0.00004;
-      const httpsCost = 0.00006;
-      const tcpCost = 0.00002;
-      const dnsCost = 0.00002;
+
       i.map(x => {
         cost[index] = 0;
         let totalChecked = 0;
@@ -223,6 +220,7 @@ class App extends Component {
             }
           }
           console.log(totalChecked);
+          //End of "Once Per Site"
         } else {
           //Runs if "Simultaneous" Check Policy is selected
           const checkInt = x.check.checkInterval;
@@ -306,9 +304,12 @@ class App extends Component {
             }
             ocObj[key] ? (totalChecked += 1) : (totalChecked += 0);
           }
+          //End of "Simultaneous"
         } // else if ends
 
-        checkTotal[index] = cost[index] * x.check.checkAmount;
+        checkTotal[index] = parseFloat(
+          (cost[index] * x.check.checkAmount).toFixed(2)
+        );
         index += 1;
       });
 
