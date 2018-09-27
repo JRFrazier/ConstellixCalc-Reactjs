@@ -25,6 +25,7 @@ class App extends Component {
         addusers: 0,
         sonar: 0
       },
+      sonar: [],
       total: 0
     };
   }
@@ -310,6 +311,9 @@ class App extends Component {
         checkTotal[index] = parseFloat(
           (cost[index] * x.check.checkAmount).toFixed(2)
         );
+        const sonarCost = this.state.sonar;
+        sonarCost[index] = cost[index];
+        this.setState({ sonar: sonarCost });
         index += 1;
       });
 
@@ -321,7 +325,9 @@ class App extends Component {
         "this is index",
         index,
         "this is checkTotal",
-        checkTotal
+        checkTotal,
+        "this is sonar State",
+        this.state.sonar
       );
     }
   }
@@ -374,7 +380,7 @@ class App extends Component {
             onClick={() => this.handleClick(3)}
             className="inactive"
           />
-          <InfoBar obj={this.state.dns} />
+          <InfoBar dnsObj={this.state.dns} sonar={this.state.sonar} />
           <div className="calc-box">
             <div id="calcType">
               <DnsCalc
