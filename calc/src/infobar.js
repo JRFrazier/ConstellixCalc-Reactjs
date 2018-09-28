@@ -12,18 +12,19 @@ class InfoBar extends React.Component {
       return a + b;
     });
     const sonarArr = this.props.sonar;
+    let sonarTotal = 0;
+
     if (!sonarArr[0] === false) {
       console.log("THIS IS TRUE!!!!!!");
-      const sonarTotal = sonarArr.reduce((a, b) => {
+      sonarTotal = sonarArr.reduce((a, b) => {
         return a + b;
       });
-    } else {
-      const sonarTotal = 0;
     }
+
     console.log("!!!!!!!!!", sonarArr, "this is sonar total", sonarTotal);
     return (
       <div id="info-bar">
-        <h3> Monthly Total: {dnsTotal + sonarTotal} </h3>
+        <h3> Monthly Total: {parseFloat(dnsTotal + sonarTotal).toFixed(2)} </h3>
       </div>
     );
   }
