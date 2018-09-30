@@ -86,7 +86,9 @@ class SonarChecks extends React.Component {
       check_number: array,
       checks: checks
     });
-    console.log("array", array, "checks", checks);
+
+    this.props.deleteSonar(key);
+    console.log("array", array, "checks", checks, "key", key);
   }
 
   handleChange(event, number) {

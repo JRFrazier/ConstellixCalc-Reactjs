@@ -67,47 +67,87 @@ class App extends Component {
       />
     );
   }
+  //Deletes check from sonar in state
+  deleteSonar(i) {
+    const sonarState = this.state.sonar;
+    sonarState.splice(i - 1, 1);
+    this.setState({ sonar: sonarState });
+  }
 
   renderTotal(i) {
     if (i[0] === "domains") {
+      let price = 0;
+      const domainCount = i[1];
+      if (domainCount === 1) {
+        price = 5;
+      } else if (domainCount > 1 && domainCount < 26) {
+        price = (domainCount - 1) * 0.5 + 5;
+      } else {
+        price = (domainCount - 25) * 0.095 + 17;
+      }
+
       this.setState({
         ...this.state,
-        dns: { ...this.state.dns, domains: i[1] }
+        dns: { ...this.state.dns, domains: price }
       });
     } else if (i[0] === "records") {
+      let price = 0;
+      if (i[1] > 100) {
+        const recordTotal = i[1] / 100;
+        console.log(recordTotal.toFixed());
+        price = Math.floor(recordTotal) * 0.5;
+      }
       this.setState({
         ...this.state,
-        dns: { ...this.state.dns, records: i[1] }
+        dns: { ...this.state.dns, records: price }
       });
     } else if (i[0] === "queries") {
+      let price = 0;
+      if (i[1] > 0 && i[1] < 1000) {
+        price = i[1] * 0.395;
+      } else if (i[1] >= 1000) {
+        price = (i[1] - 999) * 0.195 + 394.61;
+      }
       this.setState({
         ...this.state,
-        dns: { ...this.state.dns, queries: i[1] }
+        dns: { ...this.state.dns, queries: price }
       });
     } else if (i[0] === "gtd") {
+      let price = 0;
+      if (i[1] === 1) {
+        price = 5;
+      } else if (i[1] > 1 && i[1] < 101) {
+        price = (i[1] - 1) * 1 + 5;
+      } else if (i[1] > 100) {
+        price = (i[1] - 100) * 0.1 + 104;
+      }
       this.setState({
         ...this.state,
-        dns: { ...this.state.dns, gtd: i[1] }
+        dns: { ...this.state.dns, gtd: price }
       });
     } else if (i[0] === "geoprox") {
+      const price = i[1] * 0.06;
       this.setState({
         ...this.state,
-        dns: { ...this.state.dns, geoprox: i[1] }
+        dns: { ...this.state.dns, geoprox: price }
       });
     } else if (i[0] === "ipfilter") {
+      const price = i[1] * 0.06;
       this.setState({
         ...this.state,
-        dns: { ...this.state.dns, ipfilter: i[1] }
+        dns: { ...this.state.dns, ipfilter: price }
       });
     } else if (i[0] === "aname") {
+      const price = i[1] * 0.1;
       this.setState({
         ...this.state,
-        dns: { ...this.state.dns, aname: i[1] }
+        dns: { ...this.state.dns, aname: price }
       });
     } else if (i[0] === "addusers") {
+      const price = i[1] * 2;
       this.setState({
         ...this.state,
-        dns: { ...this.state.dns, addusers: i[1] }
+        dns: { ...this.state.dns, addusers: price }
       });
     } else if (Object.keys(i[0])[0] === "check") {
       let cost = [];
@@ -118,6 +158,7 @@ class App extends Component {
         cost[index] = 0;
         let totalChecked = 0;
         const checkPolicy = x.check.checkPolicy;
+        const checkAmount = x.check.checkAmount;
 
         //Check Location Objects
         const naObj = x.check.checkLocations.North_America;
@@ -312,7 +353,7 @@ class App extends Component {
           (cost[index] * x.check.checkAmount).toFixed(2)
         );
         const sonarCost = this.state.sonar;
-        sonarCost[index] = cost[index];
+        sonarCost[index] = cost[index] * checkAmount;
         this.setState({ sonar: sonarCost });
         index += 1;
       });
@@ -390,6 +431,7 @@ class App extends Component {
               <SonarCalc
                 className={sonarPage}
                 getTotal={total => this.renderTotal(total)}
+                deleteSonar={x => this.deleteSonar(x)}
               />
               <Monthly className={monthlyPage} obj={this.state.dns} />
             </div>
