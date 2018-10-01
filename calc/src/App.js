@@ -83,7 +83,7 @@ class App extends Component {
       } else if (domainCount > 1 && domainCount < 26) {
         price = (domainCount - 1) * 0.5 + 5;
       } else {
-        price = (domainCount - 25) * 0.095 + 17;
+        price = (domainCount - 26) * 0.095 + 17;
       }
 
       this.setState({

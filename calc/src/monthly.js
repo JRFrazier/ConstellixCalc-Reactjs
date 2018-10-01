@@ -1,6 +1,51 @@
 import React from "react";
 
 class Monthly extends React.Component {
+  renderDomains() {
+    const domains = this.props.obj.domains;
+    console.log("DOMAINS!!!!!", domains);
+    if (domains === 5) {
+      return (
+        <div id="domains">
+          <h3>Domains:</h3>
+          <p>1 Domain ..................................... $5</p>
+          <h4>
+            <u>Domains Total</u> = {parseFloat(domains).toFixed(2)}
+          </h4>
+        </div>
+      );
+    } else if (domains > 5 && domains < 17.01) {
+      return (
+        <div id="domains">
+          <h3>Domains:</h3>
+          <p>1 Domain ..................................... $5</p>
+          <p>
+            {(domains - 5) / 0.5} Domain/s .....................................
+            ${domains - 5}
+          </p>
+          <h4>
+            <u>Domains Total</u> = {parseFloat(domains).toFixed(2)}
+          </h4>
+        </div>
+      );
+    } else if (domains > 17) {
+      return (
+        <div id="domains">
+          <h3>Domains:</h3>
+          <p>1 Domain ..................................... $5</p>
+          <p>25 Domain/s .................................... $12</p>
+          <p>
+            {((domains - 17) / 0.095).toFixed()} Domain/s
+            ..................................... $
+            {parseFloat(domains - 17).toFixed(2)}
+          </p>
+          <h4>
+            <u>Domains Total</u> = {parseFloat(domains).toFixed(2)}
+          </h4>
+        </div>
+      );
+    }
+  }
   render() {
     const domains = this.props.obj.domains ? this.props.obj.domains : 0;
     const records = this.props.obj.records ? this.props.obj.records : 0;
@@ -8,9 +53,7 @@ class Monthly extends React.Component {
     return (
       <div className={this.props.className}>
         <div className="monthly-breakdown">
-          <h3>
-            Domains: ${this.props.obj.domains ? this.props.obj.domains : 0}
-          </h3>
+          {this.renderDomains()}
           <h3>
             Records: ${this.props.obj.records ? this.props.obj.records : 0}
           </h3>
