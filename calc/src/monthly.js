@@ -46,6 +46,24 @@ class Monthly extends React.Component {
       );
     }
   }
+
+  renderSonar() {
+    const sonar = this.props.sonarTotal;
+    const sonarCheck = this.props.sonarCheck;
+    let index = 0;
+    console.log("Monthly Sonar Check", sonarCheck);
+    sonarCheck.map(x => {
+      const checkType = x.check.checkType;
+      const checkPolicy = x.check.checkPolicy;
+      const checkLocations = x.check.checkLocations;
+      const checkInterval = x.check.checkInterval;
+      const checkAmount = x.check.checkAmount;
+      if (checkType === "HTTP") {
+        console.log("WWWWWWWWWWWTTTTTTTTTTFFFFFFFFFF");
+        return <h3>Sonar Check .............. Total</h3>;
+      }
+    });
+  }
   render() {
     const domains = this.props.obj.domains ? this.props.obj.domains : 0;
     const records = this.props.obj.records ? this.props.obj.records : 0;
@@ -73,6 +91,7 @@ class Monthly extends React.Component {
             Add Users: ${this.props.obj.addusers ? this.props.obj.addusers : 0}
           </h3>
           <h3>Sonar Monitoring Pricing:</h3>
+          {this.renderSonar()}
         </div>
       </div>
     );

@@ -26,6 +26,7 @@ class App extends Component {
         sonar: 0
       },
       sonar: [],
+      sonar_check: [],
       total: 0
     };
   }
@@ -261,7 +262,6 @@ class App extends Component {
               }
             }
           }
-          console.log(totalChecked);
           //End of "Once Per Site"
         } else {
           //Runs if "Simultaneous" Check Policy is selected
@@ -352,9 +352,17 @@ class App extends Component {
         checkTotal[index] = parseFloat(
           (cost[index] * x.check.checkAmount).toFixed(2)
         );
+
+        // Updates sonar in state
         const sonarCost = this.state.sonar;
         sonarCost[index] = cost[index] * checkAmount;
         this.setState({ sonar: sonarCost });
+
+        //Updates sonar_check in state
+        const sonarCheck = this.state.sonar_check;
+        sonarCheck[index] = i[index];
+        this.setState({ sonar_check: sonarCheck });
+
         index += 1;
       });
 
@@ -433,7 +441,12 @@ class App extends Component {
                 getTotal={total => this.renderTotal(total)}
                 deleteSonar={x => this.deleteSonar(x)}
               />
-              <Monthly className={monthlyPage} obj={this.state.dns} />
+              <Monthly
+                className={monthlyPage}
+                obj={this.state.dns}
+                sonarTotal={this.state.sonar}
+                sonarCheck={this.state.sonar_check}
+              />
             </div>
             <p className="App-intro" />
           </div>
