@@ -50,7 +50,7 @@ class Monthly extends React.Component {
   renderSonar() {
     const sonar = this.props.sonarTotal;
     const sonarCheck = this.props.sonarCheck;
-    let index = 0;
+    let sonarChecks = 
     console.log("Monthly Sonar Check", sonarCheck);
     sonarCheck.map(x => {
       const checkType = x.check.checkType;
@@ -59,10 +59,11 @@ class Monthly extends React.Component {
       const checkInterval = x.check.checkInterval;
       const checkAmount = x.check.checkAmount;
       if (checkType === "HTTP") {
-        console.log("WWWWWWWWWWWTTTTTTTTTTFFFFFFFFFF");
-        return <h3>Sonar Check .............. Total</h3>;
+        console.log("WWWWWWWWWWWTTTTTTTTTTFFFFFFFFFF", x.check.checkKey);
+        sonarChecks = (<h3 key={x.check.checkKey}>Sonar Check .............. Total</h3>)
       }
     });
+    return sonarChecks
   }
   render() {
     const domains = this.props.obj.domains ? this.props.obj.domains : 0;
