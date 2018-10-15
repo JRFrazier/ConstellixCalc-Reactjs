@@ -14,3 +14,6 @@ Now I need to add the additional locations to the modal and configure calculatio
 I was able to get the sonar pricing to show up in the "Monthly Total" on the info bar.
 Next I have to zero out the cost when a check is deleted.
 I also have to multiply the cost of each check against the number of checks defined.
+
+10/15/2018
+Need to refresh record pricing when domains are changed.

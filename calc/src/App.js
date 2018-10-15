@@ -10,12 +10,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    this.renderTotal = this.renderTotal.bind(this);
+    this.renderDomains = this.renderDomains.bind(this);
+    this.renderElements = this.renderElements.bind(this);
+    this.renderSonar = this.renderSonar.bind(this);
+    this.renderRecords = this.renderRecords.bind(this);
     this.state = {
       value: [1, 2, 3],
       calcPage: 1,
       dns: {
-        domains: 0,
+        domainPrice: 0,
         records: 0,
         queries: 0,
         gtd: 0,
@@ -24,6 +27,10 @@ class App extends Component {
         aname: 0,
         addusers: 0,
         sonar: 0
+      },
+      dnsCounts: {
+        domainCount: 0,
+        recordCount: 0
       },
       sonar: [],
       sonar_check: [],
@@ -75,7 +82,7 @@ class App extends Component {
     this.setState({ sonar: sonarState });
   }
 
-  renderTotal(i) {
+  renderDomains(i) {
     if (i[0] === "domains") {
       let price = 0;
       const domainCount = i[1];
@@ -86,21 +93,45 @@ class App extends Component {
       } else {
         price = (domainCount - 26) * 0.095 + 17;
       }
-
+      this.renderRecords(domainCount);
       this.setState({
         ...this.state,
-        dns: { ...this.state.dns, domains: price }
+        dns: { ...this.state.dns, domainPrice: price },
+        dnsCounts: { ...this.state.dnsCounts, domainCount: domainCount }
       });
-    } else if (i[0] === "records") {
+    }
+    this.renderElements(i);
+  }
+
+  renderRecords(i) {
+    console.log("HELLO!!!!!!!!!!!!!!!!!!!!", i);
+    let price = 0;
+    const recordCount = this.state.dnsCounts.recordCount - i * 100;
+
+    if (recordCount >= 100) {
+      const recordTotal = (this.state.dnsCounts.recordCount - i * 100) / 100;
+      price = Math.floor(recordTotal) * 0.5;
+    }
+    this.setState({
+      ...this.state,
+      dns: { ...this.state.dns, records: price }
+    });
+  }
+
+  renderElements(i) {
+    if (i[0] === "records") {
       let price = 0;
-      if (i[1] > 100) {
-        const recordTotal = i[1] / 100;
-        console.log(recordTotal.toFixed());
+      const recordCount = i[1] - this.state.dnsCounts.domainCount * 100;
+
+      if (recordCount >= 100) {
+        const recordTotal =
+          (i[1] - this.state.dnsCounts.domainCount * 100) / 100;
         price = Math.floor(recordTotal) * 0.5;
       }
       this.setState({
         ...this.state,
-        dns: { ...this.state.dns, records: price }
+        dns: { ...this.state.dns, records: price },
+        dnsCounts: { ...this.state.dnsCounts, recordCount: i[1] }
       });
     } else if (i[0] === "queries") {
       let price = 0;
@@ -150,7 +181,11 @@ class App extends Component {
         ...this.state,
         dns: { ...this.state.dns, addusers: price }
       });
-    } else if (Object.keys(i[0])[0] === "check") {
+    }
+  }
+
+  renderSonar(i) {
+    if (Object.keys(i[0])[0] === "check") {
       let cost = [];
       let index = 0;
       let checkTotal = [];
@@ -434,16 +469,17 @@ class App extends Component {
             <div id="calcType">
               <DnsCalc
                 className={dnsPage}
-                getTotal={total => this.renderTotal(total)}
+                getTotal={total => this.renderDomains(total)}
               />
               <SonarCalc
                 className={sonarPage}
-                getTotal={total => this.renderTotal(total)}
+                getTotal={total => this.renderSonar(total)}
                 deleteSonar={x => this.deleteSonar(x)}
               />
               <Monthly
                 className={monthlyPage}
                 obj={this.state.dns}
+                counts={this.state.dnsCounts}
                 sonarTotal={this.state.sonar}
                 sonarCheck={this.state.sonar_check}
               />
