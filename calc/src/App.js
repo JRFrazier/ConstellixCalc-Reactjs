@@ -75,6 +75,7 @@ class App extends Component {
       />
     );
   }
+
   //Deletes check from sonar in state
   deleteSonar(i) {
     const sonarState = this.state.sonar;
@@ -101,6 +102,7 @@ class App extends Component {
       });
     }
     this.renderElements(i);
+    console.log("this is STATE!", this.state);
   }
 
   renderRecords(i) {

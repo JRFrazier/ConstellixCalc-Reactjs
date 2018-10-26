@@ -27,6 +27,7 @@ class Monthly extends React.Component {
           <h4>
             <u>Domains Total</u> = {parseFloat(domains).toFixed(2)}
           </h4>
+          {this.renderRecords()}
         </div>
       );
     } else if (domains > 17) {
@@ -43,6 +44,7 @@ class Monthly extends React.Component {
           <h4>
             <u>Domains Total</u> = {parseFloat(domains).toFixed(2)}
           </h4>
+          {this.renderRecords()}
         </div>
       );
     }
