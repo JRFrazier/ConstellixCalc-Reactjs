@@ -52,13 +52,14 @@ class Monthly extends React.Component {
 
   renderRecords() {
     const records = this.props.obj.records.toFixed(2);
-    const domains = this.props.counts.domainCount;
+    const domains =
+      this.props.counts.recordCount - this.props.counts.domainCount * 100;
     if (records > 0 && domains > 0) {
       return (
         <div>
           <h3>Records:</h3>
           <p>
-            {domains} Domain/s .................................... ${records}{" "}
+            {domains} Records .................................... ${records}{" "}
           </p>
         </div>
       );
