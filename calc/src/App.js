@@ -96,14 +96,12 @@ class App extends Component {
           const obj = {};
           obj["dns"] = x;
           obj.dns.records = price;
-          console.log(1111111111111111111111111111111111);
           this.setState(obj);
         } else if (recordCount - domainCount * 100 <= 100) {
           const x = this.state.dns;
           const obj = {};
           obj["dns"] = x;
           obj.dns.records = 0;
-          console.log(1111111111111111111111111111111111);
           this.setState(obj);
         }
       } else if (domainCount > 1 && domainCount < 26) {
@@ -115,14 +113,12 @@ class App extends Component {
           const obj = {};
           obj["dns"] = x;
           obj.dns.records = price;
-          console.log(222222222222222222222222222222222);
           this.setState(obj);
         } else if (recordCount - domainCount * 100 <= 100) {
           const x = this.state.dns;
           const obj = {};
           obj["dns"] = x;
           obj.dns.records = 0;
-          console.log(1111111111111111111111111111111111);
           this.setState(obj);
         }
       } else {
@@ -134,14 +130,12 @@ class App extends Component {
           const obj = {};
           obj["dns"] = x;
           obj.dns.records = price;
-          console.log(333333333333333333333333333333333333);
           this.setState(obj);
         } else if (recordCount - domainCount * 100 <= 100) {
           const x = this.state.dns;
           const obj = {};
           obj["dns"] = x;
           obj.dns.records = 0;
-          console.log(1111111111111111111111111111111111);
           this.setState(obj);
         }
       }
